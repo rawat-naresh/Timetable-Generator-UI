@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="vbar" stylesheets="@../../../../css/sidebar.css" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timetable.ui.data.DataSidebarUIController">
+         <children>
+            <JFXButton fx:id="basicButton" onMouseClicked="#showBasicUI" prefHeight="50.0" prefWidth="230.0" text="Basic" />
+            <Separator prefWidth="200.0" />
+            <JFXButton fx:id="subjectsButton" onMouseClicked="#showSubjectsUI" prefHeight="50.0" prefWidth="230.0" text="Subjets" />
+            <Separator prefWidth="200.0" />
+            <JFXButton fx:id="teachersButton" layoutX="10.0" layoutY="63.0" onMouseClicked="#showTeachersUI" prefHeight="50.0" prefWidth="230.0" text="Teachers" />
+            <Separator layoutX="10.0" layoutY="113.0" prefWidth="200.0" />
+            <JFXButton fx:id="studentsButton" layoutX="10.0" layoutY="116.0" onMouseClicked="#showStudentsUI" prefHeight="50.0" prefWidth="230.0" text="Students" />
+            <Separator layoutX="10.0" layoutY="166.0" prefWidth="200.0" />
+            <JFXButton fx:id="activityButton" layoutX="10.0" layoutY="169.0" onMouseClicked="#showActivityUI" prefHeight="50.0" prefWidth="230.0" text="Activity" />
+            <Separator layoutX="10.0" layoutY="219.0" prefWidth="200.0" />
+            <JFXButton fx:id="spaceButton" layoutX="10.0" layoutY="222.0" onMouseClicked="#showSpaceUI" prefHeight="50.0" prefWidth="230.0" text="Space" />
+            <Separator layoutX="10.0" layoutY="272.0" prefWidth="200.0" />
+         </children>
+      </VBox>

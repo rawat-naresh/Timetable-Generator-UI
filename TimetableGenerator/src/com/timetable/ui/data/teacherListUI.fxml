@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+
+<TableView fx:id="teacherTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timetable.ui.data.TeacherListUIController">
+  <columns>
+    <TableColumn fx:id="teacherId" prefWidth="86.0" text="Teacher ID" />
+    <TableColumn fx:id="teacherName" prefWidth="132.0" text="Name" />
+      <TableColumn fx:id="teachingHours" prefWidth="82.0" text="Teaching Hours" />
+      <TableColumn fx:id="hasConstraint" minWidth="0.0" prefWidth="119.0" text="Has Constriant" />
+  </columns>
+</TableView>

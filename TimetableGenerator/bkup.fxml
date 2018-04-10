@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../../../css/sidebar.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timetable.ui.file.FileSidebarUIController">
+
+   <left>
+      <VBox prefHeight="346.0" prefWidth="230.0" styleClass="vbar" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton fx:id="openButton" onMouseClicked="#openFile" prefHeight="50.0" prefWidth="230.0" text="Open" />
+            <Separator prefWidth="200.0" />
+            <JFXButton fx:id="saveButton" onMouseClicked="#saveFile" prefHeight="50.0" prefWidth="230.0" text="Save" />
+            <Separator prefWidth="200.0" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox alignment="CENTER" prefHeight="478.0" prefWidth="521.0" BorderPane.alignment="CENTER"  xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timetable.ui.file.FileSidebarUIController">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="272.0" prefWidth="521.0" text="Timetable Generator v2.0" textAlignment="JUSTIFY" textFill="#171212">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="45.0" prefWidth="183.0" text="Developed by:" textAlignment="JUSTIFY" underline="true">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="153.0" layoutY="396.0" prefHeight="30.0" prefWidth="235.0" text="Ryamse Ryam">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="153.0" layoutY="442.0" prefHeight="30.0" prefWidth="235.0" text="Naresh Rawat">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="153.0" layoutY="489.0" prefHeight="30.0" prefWidth="235.0" text="Kanchan Jirel">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="153.0" layoutY="519.0" prefHeight="30.0" prefWidth="235.0" text="Jagdishwor Adhikari">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="153.0" layoutY="487.0" prefHeight="51.0" prefWidth="235.0" text="Project Coordinator" underline="true">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="153.0" layoutY="502.0" prefHeight="30.0" prefWidth="235.0" text="Mitender kr. Arya">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </center>
+   <padding>
+      <Insets bottom="10.0" />
+   </padding>
+</BorderPane>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="vbar" stylesheets="@../../../../css/sidebar.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timetable.ui.constraint.ConstraintSidebarUIController">
+   <children>
+      <JFXButton fx:id="teacherConstraintButton" onMouseClicked="#showTeacherConstraintUI" prefHeight="50.0" prefWidth="230.0" text="Teacher Constraint" />
+      <Separator prefWidth="200.0" />
+      <JFXButton fx:id="studentConstraintButton" onMouseClicked="#showStudentConstraintUI" prefHeight="50.0" prefWidth="230.0" text="Student Constraint" />
+      <Separator prefWidth="200.0" />
+      <JFXButton fx:id="roomConstraintButton" layoutX="10.0" layoutY="63.0" onMouseClicked="#showRoomConstraintUI" prefHeight="50.0" prefWidth="230.0" text="Room Constraint" />
+      <Separator layoutX="10.0" layoutY="113.0" prefWidth="200.0" />
+   </children>
+</VBox>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="vbar" stylesheets="@../../../../css/sidebar.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timetable.ui.generate.GenerateSidebarUIController">
+   <children>
+      <JFXButton fx:id="generateButton" onMouseClicked="#showGenerateUI" prefHeight="50.0" prefWidth="230.0" text="Generate" />
+      <Separator prefWidth="200.0" />
+      <JFXButton fx:id="exportButton" onMouseClicked="#showExportUI" prefHeight="50.0" prefWidth="230.0" text="Export" />
+      <Separator prefWidth="200.0" />
+   </children>
+</VBox>
