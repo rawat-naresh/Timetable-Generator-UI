@@ -10,12 +10,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 
 /**
  * @author Naresh
  *
  */
 public class TeacherListUIController implements Initializable {
+	
+	 @FXML
+	 private VBox teacherInfo;
 
     @FXML    
     private TableView<Teacher> teacherTable;

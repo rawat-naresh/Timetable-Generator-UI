@@ -46,22 +46,26 @@ public class DataSidebarUIController {
     @FXML
     void showSpaceUI(MouseEvent event) {
 
+    	ResourceInitializer.mainUI.setCenter(ResourceInitializer.roomListUI);
+    	ResourceInitializer.mainUI.setRight(ResourceInitializer.addRoomUI);
     }
 
     @FXML
     void showStudentsUI(MouseEvent event) {
-
+    	
     }
 
     @FXML
     void showSubjectsUI(MouseEvent event) {
-    	//rootBorderLayout.setCenter(ResourceInitializer.subjectsUI);
+    	ResourceInitializer.mainUI.setCenter(ResourceInitializer.subjectListUI);
+    	ResourceInitializer.mainUI.setRight(ResourceInitializer.addSubjectUI);
     }
 
     @FXML
     void showTeachersUI(MouseEvent event) {
     	
     	ResourceInitializer.mainUI.setCenter(ResourceInitializer.teacherListUI);
+    	ResourceInitializer.mainUI.setRight(ResourceInitializer.addTeacherUI);
     }
 
 }
