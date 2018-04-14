@@ -35,12 +35,14 @@ public class DataSidebarUIController {
 
     @FXML
     void showActivityUI(MouseEvent event) {
-
+    	ResourceInitializer.mainUI.setCenter(ResourceInitializer.activityListUI);
+    	ResourceInitializer.mainUI.setRight(ResourceInitializer.addActivityUI);
     }
 
     @FXML
     void showBasicUI(MouseEvent event) {
-
+    	ResourceInitializer.mainUI.setCenter(ResourceInitializer.basicInfoUI);
+    	ResourceInitializer.mainUI.setRight(null);
     }
 
     @FXML
@@ -52,7 +54,8 @@ public class DataSidebarUIController {
 
     @FXML
     void showStudentsUI(MouseEvent event) {
-    	
+    	ResourceInitializer.mainUI.setCenter(ResourceInitializer.addCourseUI);
+    	ResourceInitializer.mainUI.setRight(null);
     }
 
     @FXML

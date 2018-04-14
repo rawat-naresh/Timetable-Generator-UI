@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox fx:id="rootVBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="692.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timetable.ui.data.BasicInfoUIController">
+   <children>
+      <Label fx:id="collegeName" alignment="CENTER" prefHeight="49.0" prefWidth="600.0" text="ABC University">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="collegeNameModifyButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#modifyName" prefHeight="35.0" prefWidth="123.0" text="Modify" />
+      <HBox prefHeight="444.0" prefWidth="692.0">
+         <children>
+            <VBox prefHeight="459.0" prefWidth="330.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="332.0" text="Teaching Days" underline="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ListView prefHeight="338.0" prefWidth="368.0" />
+                  <HBox prefHeight="45.0" prefWidth="330.0">
+                     <children>
+                        <TextField prefHeight="45.0" prefWidth="205.0" promptText="Sunday">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="43.0" prefWidth="120.0" text="Add">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="440.0" prefWidth="330.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="331.0" text="Teaching Hours" underline="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ListView prefHeight="338.0" prefWidth="276.0" />
+                  <HBox prefHeight="45.0" prefWidth="330.0">
+                     <children>
+                        <TextField prefHeight="45.0" prefWidth="205.0" promptText="09:00-09:45">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="43.0" prefWidth="120.0" text="Add">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="10.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

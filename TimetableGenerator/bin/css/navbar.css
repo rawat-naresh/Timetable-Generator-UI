@@ -1,0 +1,15 @@
+.hbox{
+	-fx-background-color:  #CFD8DC;
+}
+
+.jfx-button{
+	
+	-fx-background-color: transparent ;
+	-fx-background-radius: 0px;
+	-fx-font-size: 18px;
+	-fx-font-family: calibre;
+	-fx-alignment: CENTER;
+}
+.jfx-button:hover{
+    -fx-background-color: #29B6F6;
+}

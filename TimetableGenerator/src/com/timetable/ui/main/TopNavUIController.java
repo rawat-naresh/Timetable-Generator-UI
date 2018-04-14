@@ -28,17 +28,22 @@ public class TopNavUIController {
     @FXML
     void displayConstraintUI(MouseEvent event) {
     	rootBorderPane.setLeft(ResourceInitializer.mainConstraintUI);
+    	ResourceInitializer.mainUI.setCenter(ResourceInitializer.listTeacherConstraintUI);
+    	ResourceInitializer.mainUI.setRight(ResourceInitializer.addTeacherConstraintUI);
     }
 
     @FXML
     void displayDataUI(MouseEvent event) {
     	rootBorderPane.setLeft(ResourceInitializer.mainDataUI);
-    	//rootBorderPane.set
+    	rootBorderPane.setCenter(ResourceInitializer.basicInfoUI);
+    	rootBorderPane.setRight(null);
     }
 
     @FXML
     void displayFileUI(MouseEvent event) {
     	rootBorderPane.setLeft(ResourceInitializer.mainFileUI);
+    	rootBorderPane.setCenter(ResourceInitializer.introUI);
+    	rootBorderPane.setRight(null);
     }
 
     @FXML
