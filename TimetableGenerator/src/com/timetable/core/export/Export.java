@@ -1,4 +1,4 @@
-package com.timetable.export;
+package com.timetable.core.export;
 
 
 import java.io.FileOutputStream;
@@ -16,13 +16,13 @@ import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 
-import com.timetable.classes.LabActivity;
-import com.timetable.classes.LectureActivity;
-import com.timetable.constraint.Constraint;
-import com.timetable.main.Data;
-import com.timetable.timetable.TimetableCell;
-import com.timetable.timetable.TimetableRow;
-import com.timetable.timetable.TimetableSheet;
+import com.timetable.core.classes.LabActivity;
+import com.timetable.core.classes.LectureActivity;
+import com.timetable.core.constraint.Constraint;
+import com.timetable.core.main.Data;
+import com.timetable.core.timetable.TimetableCell;
+import com.timetable.core.timetable.TimetableRow;
+import com.timetable.core.timetable.TimetableSheet;
 
 
 /**

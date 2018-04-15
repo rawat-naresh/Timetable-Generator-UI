@@ -1,11 +1,11 @@
-package com.timetable.main;
+package com.timetable.core.main;
 
-import com.timetable.classes.Inputs;
-import com.timetable.constraint.Constraint;
-import com.timetable.export.Export;
-import com.timetable.timetable.TimetableCell;
-import com.timetable.timetable.TimetableRow;
-import com.timetable.timetable.TimetableSheet;
+import com.timetable.core.classes.Inputs;
+import com.timetable.core.constraint.Constraint;
+import com.timetable.core.export.Export;
+import com.timetable.core.timetable.TimetableCell;
+import com.timetable.core.timetable.TimetableRow;
+import com.timetable.core.timetable.TimetableSheet;
 
 /**
  * @author Naresh

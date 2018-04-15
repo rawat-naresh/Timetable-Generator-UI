@@ -1,11 +1,11 @@
-package com.timetable.classes;
+package com.timetable.core.classes;
 
 import java.util.ArrayList;
 
-import com.timetable.constraint.Constraint;
-import com.timetable.constraint.SpaceConstraint;
-import com.timetable.constraint.TimeConstraint;
-import com.timetable.main.Data;
+import com.timetable.core.constraint.Constraint;
+import com.timetable.core.constraint.SpaceConstraint;
+import com.timetable.core.constraint.TimeConstraint;
+import com.timetable.core.main.Data;
 
 /**
  * @author Naresh

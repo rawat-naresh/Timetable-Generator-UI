@@ -1,18 +1,18 @@
-package com.timetable.main;
+package com.timetable.core.main;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-import com.timetable.classes.LabActivity;
-import com.timetable.classes.LectureActivity;
-import com.timetable.classes.Student;
-import com.timetable.classes.Teacher;
-import com.timetable.constraint.Constraint;
-import com.timetable.constraint.TimeConstraint;
-import com.timetable.timetable.TimetableCell;
-import com.timetable.timetable.TimetableRow;
-import com.timetable.timetable.TimetableSheet;
+import com.timetable.core.classes.LabActivity;
+import com.timetable.core.classes.LectureActivity;
+import com.timetable.core.classes.Student;
+import com.timetable.core.classes.Teacher;
+import com.timetable.core.constraint.Constraint;
+import com.timetable.core.constraint.TimeConstraint;
+import com.timetable.core.timetable.TimetableCell;
+import com.timetable.core.timetable.TimetableRow;
+import com.timetable.core.timetable.TimetableSheet;
 
 /**
  * @author Naresh

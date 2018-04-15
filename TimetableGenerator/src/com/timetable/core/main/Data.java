@@ -1,17 +1,17 @@
 
-package com.timetable.main;
+package com.timetable.core.main;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.timetable.classes.LabActivity;
-import com.timetable.classes.LectureActivity;
-import com.timetable.classes.Room;
-import com.timetable.classes.SortActivities;
-import com.timetable.classes.Student;
-import com.timetable.classes.Subject;
-import com.timetable.classes.Teacher;
-import com.timetable.classes.TimeSlot;
+import com.timetable.core.classes.LabActivity;
+import com.timetable.core.classes.LectureActivity;
+import com.timetable.core.classes.Room;
+import com.timetable.core.classes.SortActivities;
+import com.timetable.core.classes.Student;
+import com.timetable.core.classes.Subject;
+import com.timetable.core.classes.Teacher;
+import com.timetable.core.classes.TimeSlot;
 
 
 /**

@@ -1,6 +1,6 @@
-package com.timetable.timetable;
+package com.timetable.core.timetable;
 
-import com.timetable.constraint.Constraint;
+import com.timetable.core.constraint.Constraint;
 
 /**
  * @author Naresh

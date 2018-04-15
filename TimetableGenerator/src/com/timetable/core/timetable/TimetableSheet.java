@@ -1,4 +1,4 @@
-package com.timetable.timetable;
+package com.timetable.core.timetable;
 
 import java.util.HashMap;
 

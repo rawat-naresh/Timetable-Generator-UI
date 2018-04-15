@@ -1,4 +1,4 @@
-package com.timetable.classes;
+package com.timetable.core.classes;
 
 /**
  * @author Naresh

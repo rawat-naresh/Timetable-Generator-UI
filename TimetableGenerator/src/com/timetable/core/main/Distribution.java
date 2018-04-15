@@ -1,8 +1,8 @@
-package com.timetable.main;
+package com.timetable.core.main;
 
 import java.util.HashMap;
 
-import com.timetable.timetable.TimetableSheet;
+import com.timetable.core.timetable.TimetableSheet;
 
 /**
  * @author Naresh
