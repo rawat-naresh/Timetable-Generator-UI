@@ -4,11 +4,13 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="vbar" stylesheets="@../../../../css/sidebar.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timetable.ui.file.FileSidebarUIController">
+<VBox fx:id="rootContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="vbar" stylesheets="@../../../../css/sidebar.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timetable.ui.file.FileSidebarUIController">
    <children>
       <JFXButton fx:id="openButton" onMouseClicked="#openFile" prefHeight="50.0" prefWidth="230.0" text="Open" />
       <Separator prefWidth="200.0" />
-      <JFXButton fx:id="saveButton" onMouseClicked="#saveFile" prefHeight="50.0" prefWidth="230.0" text="Save" />
+      <JFXButton fx:id="newButton" onMouseClicked="#saveFile" prefHeight="50.0" prefWidth="230.0" text="New" />
       <Separator prefWidth="200.0" />
+      <JFXButton fx:id="saveButton" layoutX="10.0" layoutY="63.0" onMouseClicked="#saveFile" prefHeight="50.0" prefWidth="230.0" text="Save" />
+      <Separator layoutX="10.0" layoutY="113.0" prefWidth="200.0" />
    </children>
 </VBox>

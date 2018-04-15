@@ -11,10 +11,12 @@ import javafx.stage.Stage;
  *
  */
 public class Main extends Application {
+	
+	Stage stage;
 	@Override
 	public void start(Stage primaryStage) {
 		
-		
+		stage = primaryStage;
 		
 		try {
 			BorderPane root = ResourceInitializer.mainUI;
@@ -29,11 +31,17 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 	
 	public static void main(String[] args) {
 		new ResourceInitializer().initializeAllUI();
 		launch(args);
+	}
+	
+	public Stage getMainStage() {
+		return stage;
 	}
 	
 	
