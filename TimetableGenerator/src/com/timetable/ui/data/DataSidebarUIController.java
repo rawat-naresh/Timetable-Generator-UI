@@ -6,8 +6,8 @@ import com.timetable.ui.main.ResourceInitializer;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 
 
 
@@ -45,14 +45,7 @@ public class DataSidebarUIController {
 
     @FXML
     void showBasicUI(MouseEvent event) {
-    	try {
-			VBox basicInfoUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/basicInfoUI.fxml"));
-			ResourceInitializer.mainUI.setCenter(basicInfoUI);
-	    	ResourceInitializer.mainUI.setRight(null);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	loadUI("/com/timetable/ui/data/basicInfoUI.fxml",null);
     	
     }
 
@@ -80,6 +73,26 @@ public class DataSidebarUIController {
     	
     	ResourceInitializer.mainUI.setCenter(ResourceInitializer.teacherListUI);
     	ResourceInitializer.mainUI.setRight(ResourceInitializer.addTeacherUI);
+    }
+    
+    public void loadUI(String centerLoc,String rightLoc) {
+    	try {
+			Parent centerUI = null;
+			Parent rightUI = null;
+			
+			if(centerLoc != null)
+				centerUI = FXMLLoader.load(getClass().getResource(centerLoc));
+			
+			if(rightLoc != null)
+				rightUI = FXMLLoader.load(getClass().getResource(rightLoc));
+			
+			ResourceInitializer.mainUI.setCenter(centerUI);
+	    	ResourceInitializer.mainUI.setRight(rightUI);
+	    	
+	    	
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
 }

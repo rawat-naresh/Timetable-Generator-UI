@@ -1,5 +1,7 @@
 package com.timetable.ui.main;
 import com.jfoenix.controls.JFXButton;
+import com.timetable.ui.data.DataSidebarUIController;
+
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -35,8 +37,7 @@ public class TopNavUIController {
     @FXML
     void displayDataUI(MouseEvent event) {
     	rootBorderPane.setLeft(ResourceInitializer.mainDataUI);
-    	rootBorderPane.setCenter(ResourceInitializer.basicInfoUI);
-    	rootBorderPane.setRight(null);
+    	new DataSidebarUIController().loadUI(ResourceInitializer.basicInfoUI, null);
     }
 
     @FXML

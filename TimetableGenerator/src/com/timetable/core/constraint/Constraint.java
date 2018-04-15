@@ -34,9 +34,8 @@ public class Constraint implements Serializable {
 	private int noOfDaysPerWeek = 6;
     private String collegeName = "QUANTUM UNIVERSITY";
     
-    public static String[] days = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
-    public static  String[] lectureTimes = {"09:00-09:55","09:55-10:50","10:50-11:45","11:45-12:40","12:40-1:35",
-                                            "01:35-02:30","02:30-03:25","03:25-04:20"};
+    public ArrayList<String> days = new ArrayList<>(7);
+    public ArrayList<String> lectureTimes = new ArrayList<>(6);
     
     //{"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"}
     //{"09:00-09:55","09:55-10:50","10:50-11:45","11:45-12:40","12:40-1:35",
@@ -60,20 +59,30 @@ public class Constraint implements Serializable {
     }
    
     
-    public static String[] getDays() {
+    public ArrayList<String> getDays() {
 		return days;
 	}
-
-	public static void setDays(String[] days) {
-		Constraint.days = days;
+    
+	public String getDay(int index) {
+			
+		return days.get(index);
 	}
 
-	public static String[] getLectureTimes() {
+	public void setDays(ArrayList<String> days) {
+		
+		this.days = days;
+	}
+
+	public ArrayList<String> getLectureTimes() {
 		return lectureTimes;
 	}
+	
+	public String getLectureTime(int index) {
+		return lectureTimes.get(index);
+	}
 
-	public static void setLectureTimes(String[] lectureTimes) {
-		Constraint.lectureTimes = lectureTimes;
+	public void setLectureTime(String lectureTime) {
+		lectureTimes.add(lectureTime);
 	}
 
 	public int getNoOfHoursPerDay() {

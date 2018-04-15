@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -29,14 +28,9 @@
                   <ListView fx:id="daysList" prefHeight="338.0" prefWidth="368.0" />
                   <HBox prefHeight="45.0" prefWidth="330.0">
                      <children>
-                        <TextField fx:id="daysTextField" prefHeight="45.0" prefWidth="205.0" promptText="Sunday">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </TextField>
-                        <Button fx:id="addDayButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addDay" prefHeight="43.0" prefWidth="120.0" text="Add">
+                        <Button fx:id="addDaysButton" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addDays" prefHeight="45.0" prefWidth="368.0" text="Add Days">
                            <HBox.margin>
-                              <Insets left="5.0" />
+                              <Insets />
                            </HBox.margin>
                         </Button>
                      </children>
@@ -59,14 +53,9 @@
                   <ListView fx:id="hoursList" prefHeight="338.0" prefWidth="276.0" />
                   <HBox prefHeight="45.0" prefWidth="330.0">
                      <children>
-                        <TextField fx:id="hourTextField" prefHeight="45.0" prefWidth="205.0" promptText="09:00-09:45">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </TextField>
-                        <Button fx:id="addHourButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addHour" prefHeight="43.0" prefWidth="120.0" text="Add">
+                        <Button fx:id="addHoursButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addHours" prefHeight="45.0" prefWidth="368.0" text="Add Hours">
                            <HBox.margin>
-                              <Insets left="5.0" />
+                              <Insets />
                            </HBox.margin>
                         </Button>
                      </children>
