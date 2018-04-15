@@ -18,7 +18,7 @@ public class Generate {
 		new Inputs().fetchFromFile();
 		Data data = Data.getInstance();
 		
-		Constraint constraint = new Constraint();
+		Constraint constraint = Constraint.getInstance();
 		constraint.computeLabWeightage(data.getLabActivities());
 		constraint.computeLectureWeightage(data.getLectureActivities());
 		
@@ -55,11 +55,11 @@ public class Generate {
 			//creating sheet equals to number of student
 			TimetableSheet sheet = new TimetableSheet(data.getStudents().get(s).getGroupName());
 			
-			for(int i=1;i<=Constraint.noOfDaysPerWeek;i++) {
+			for(int i=1;i<=constraint.getNoOfDaysPerWeek();i++) {
 				//creating row
 				TimetableRow row= new TimetableRow();
 				
-				for(int j=1;j<=Constraint.noOfHoursPerDay;j++) {
+				for(int j=1;j<=constraint.getNoOfHoursPerDay();j++) {
 					//creating cell
 					TimetableCell cell= new TimetableCell();
 	

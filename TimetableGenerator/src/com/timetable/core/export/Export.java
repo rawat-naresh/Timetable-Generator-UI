@@ -36,8 +36,10 @@ public class Export {
 	private FileOutputStream output;
 	private CellStyle style;
 	private Font font;
+	private Constraint constraint;
 
 	public Export(String fileName)  {
+		constraint = Constraint.getInstance();
 		data = Data.getInstance();
 		createExcelFile(fileName);
 	}
@@ -88,7 +90,7 @@ public class Export {
 		Cell c = timesRow.createCell(0);
 		c.setCellStyle(style);
 		c.setCellValue("DAYS/TIMES");
-		for(int i=0;i<Constraint.noOfHoursPerDay;i++) {
+		for(int i=0;i<constraint.getNoOfHoursPerDay();i++) {
 			Cell timeCell = timesRow.createCell(i+1);
 			timeCell.setCellValue(Constraint.lectureTimes[i]);
 			timeCell.setCellStyle(style);

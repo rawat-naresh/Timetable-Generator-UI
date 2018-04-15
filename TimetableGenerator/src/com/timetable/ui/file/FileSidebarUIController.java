@@ -1,8 +1,7 @@
 package com.timetable.ui.file;
-
 import java.io.File;
-
 import com.jfoenix.controls.JFXButton;
+import com.timetable.core.model.Model;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -21,9 +20,6 @@ public class FileSidebarUIController {
     private JFXButton openButton;
 
     @FXML
-    private JFXButton newButton;
-
-    @FXML
     private JFXButton saveButton;
 
     @FXML
@@ -32,20 +28,29 @@ public class FileSidebarUIController {
     	configureFileChooser(fileChooser);   
     	File file = fileChooser.showOpenDialog(null);
     	if(file != null) {
-    		System.out.println(file.getAbsolutePath());
+    		
+    		new Model().readFromFile(file);
+    		
     	}
     }
 
     @FXML
     void saveFile(MouseEvent event) {
 
+    	final FileChooser fileChooser = new FileChooser();
+    	configureFileChooser(fileChooser);   
+    	File file = fileChooser.showSaveDialog(null);
+    	if(file != null) {
+    		new Model().saveToFile(file);
+    	}
+    	
     }
     
     
     private static void configureFileChooser(final FileChooser fileChooser){                           
-        fileChooser.setTitle("Select File");
+        fileChooser.setTitle("Save File");
         fileChooser.setInitialDirectory(
-            new File("C:\\Users\\Ravishu\\git\\Timetable-Generator-UI\\TimetableGenerator\\data")
+            new File(System.getProperty("user.dir")+"\\data")
         );
         
         fileChooser.getExtensionFilters().addAll(

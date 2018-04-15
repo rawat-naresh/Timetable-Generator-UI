@@ -8,8 +8,6 @@
    <children>
       <JFXButton fx:id="openButton" onMouseClicked="#openFile" prefHeight="50.0" prefWidth="230.0" text="Open" />
       <Separator prefWidth="200.0" />
-      <JFXButton fx:id="newButton" onMouseClicked="#saveFile" prefHeight="50.0" prefWidth="230.0" text="New" />
-      <Separator prefWidth="200.0" />
       <JFXButton fx:id="saveButton" layoutX="10.0" layoutY="63.0" onMouseClicked="#saveFile" prefHeight="50.0" prefWidth="230.0" text="Save" />
       <Separator layoutX="10.0" layoutY="113.0" prefWidth="200.0" />
    </children>

@@ -5,8 +5,8 @@
  */
 package com.timetable.core.constraint;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-
 import com.timetable.core.classes.LabActivity;
 import com.timetable.core.classes.LectureActivity;
 
@@ -15,22 +15,90 @@ import com.timetable.core.classes.LectureActivity;
  * @author Naresh
  *
  */
-public class Constraint {
+public class Constraint implements Serializable {
  
-    public static int noOfHoursPerDay = 8;
-    public static int noOfDaysPerWeek =6;
-    private static final int TIME_CONSTRAINT = 50;
-    private static final int SPACE_CONSTRAINT = 50;
-    private static int totalWeight=0;
+	
+	private static final long serialVersionUID = 1L;
+
+	private static Constraint instance = null;
+	
+    public static final int TIME_CONSTRAINT = 50;
+    public static final int SPACE_CONSTRAINT = 50;
+    public static int totalWeight=0;
     public static final int LAB_TYPE = 1996;
     public static final int LECTURE_TYPE = 1997;
     public static final int BREAK_TYPE = 1989;
     public static final int UNOCCUPIED_TYPE = 1999;
     
+    private int noOfHoursPerDay = 8;
+	private int noOfDaysPerWeek = 6;
+    private String collegeName = "QUANTUM UNIVERSITY";
+    
     public static String[] days = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
     public static  String[] lectureTimes = {"09:00-09:55","09:55-10:50","10:50-11:45","11:45-12:40","12:40-1:35",
                                             "01:35-02:30","02:30-03:25","03:25-04:20"};
+    
+    //{"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"}
+    //{"09:00-09:55","09:55-10:50","10:50-11:45","11:45-12:40","12:40-1:35",
+    //"01:35-02:30","02:30-03:25","03:25-04:20"}
+    
+    
+    private Constraint() {
+		
+	}
+    
+    public static Constraint getInstance() {
+    	if(instance == null) {
+    		instance = new Constraint();
+    	}
+    	
+    	return instance;
+    }
+    
+    public static void setInstance(Constraint constraint) {
+    	instance = constraint;
+    }
    
+    
+    public static String[] getDays() {
+		return days;
+	}
+
+	public static void setDays(String[] days) {
+		Constraint.days = days;
+	}
+
+	public static String[] getLectureTimes() {
+		return lectureTimes;
+	}
+
+	public static void setLectureTimes(String[] lectureTimes) {
+		Constraint.lectureTimes = lectureTimes;
+	}
+
+	public int getNoOfHoursPerDay() {
+		return noOfHoursPerDay;
+	}
+
+	public void setNoOfHoursPerDay(int noOfHoursPerDay) {
+		this.noOfHoursPerDay = noOfHoursPerDay;
+	}
+
+	public int getNoOfDaysPerWeek() {
+		return noOfDaysPerWeek;
+	}
+
+	public void setNoOfDaysPerWeek(int noOfDaysPerWeek) {
+		this.noOfDaysPerWeek = noOfDaysPerWeek;
+	}
+
+	public String getCollegeName() {
+		return collegeName;
+	}
+
+	public void setCollegeName(String collegeName) {
+		this.collegeName = collegeName;
+	}
     
     public void computeLabWeightage(ArrayList<LabActivity> a) {
     	

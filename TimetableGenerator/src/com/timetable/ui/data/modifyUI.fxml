@@ -7,18 +7,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="151.0" prefWidth="291.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="rootContainer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="151.0" prefWidth="291.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timetable.ui.data.ModifyUIController">
    <children>
-      <TextField prefHeight="61.0" prefWidth="291.0" promptText="Enter College Name">
+      <TextField fx:id="nameTextField" alignment="TOP_CENTER" prefHeight="41.0" prefWidth="281.0" promptText="Enter College Name">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <HBox prefHeight="68.0" prefWidth="291.0">
+      <HBox alignment="BOTTOM_CENTER" prefHeight="71.0" prefWidth="281.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" text="Button" />
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#save" prefHeight="50.0" prefWidth="140.0" text="Save" />
          </children>
          <VBox.margin>
             <Insets top="10.0" />

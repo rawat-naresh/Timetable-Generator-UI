@@ -9,15 +9,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox fx:id="rootVBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="692.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timetable.ui.data.BasicInfoUIController">
+<VBox fx:id="rootContainer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="692.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timetable.ui.data.BasicInfoUIController">
    <children>
       <Label fx:id="collegeName" alignment="CENTER" prefHeight="49.0" prefWidth="600.0" text="ABC University">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="collegeNameModifyButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#modifyName" prefHeight="35.0" prefWidth="123.0" text="Modify" />
+      <Button fx:id="collegeNameModifyButton" alignment="CENTER" mnemonicParsing="false" onAction="#modifyName" prefHeight="35.0" prefWidth="123.0" text="Modify" />
       <HBox prefHeight="444.0" prefWidth="692.0">
          <children>
             <VBox prefHeight="459.0" prefWidth="330.0">
@@ -27,15 +26,15 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ListView prefHeight="338.0" prefWidth="368.0" />
+                  <ListView fx:id="daysList" prefHeight="338.0" prefWidth="368.0" />
                   <HBox prefHeight="45.0" prefWidth="330.0">
                      <children>
-                        <TextField prefHeight="45.0" prefWidth="205.0" promptText="Sunday">
+                        <TextField fx:id="daysTextField" prefHeight="45.0" prefWidth="205.0" promptText="Sunday">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="43.0" prefWidth="120.0" text="Add">
+                        <Button fx:id="addDayButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addDay" prefHeight="43.0" prefWidth="120.0" text="Add">
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin>
@@ -57,15 +56,15 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ListView prefHeight="338.0" prefWidth="276.0" />
+                  <ListView fx:id="hoursList" prefHeight="338.0" prefWidth="276.0" />
                   <HBox prefHeight="45.0" prefWidth="330.0">
                      <children>
-                        <TextField prefHeight="45.0" prefWidth="205.0" promptText="09:00-09:45">
+                        <TextField fx:id="hourTextField" prefHeight="45.0" prefWidth="205.0" promptText="09:00-09:45">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="43.0" prefWidth="120.0" text="Add">
+                        <Button fx:id="addHourButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addHour" prefHeight="43.0" prefWidth="120.0" text="Add">
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin>

@@ -13,7 +13,7 @@ import com.timetable.core.main.Data;
  */
 public class Inputs {
 	ArrayList<String> notAvailableTimes = new ArrayList<>();
-	
+	Constraint constraint = Constraint.getInstance();
 	public Inputs() {
 		
 	}
@@ -40,8 +40,8 @@ public class Inputs {
 		timeConstraint.setWeightage(50);
 		
 		//creating timeslots
-		for(int i=0; i<Constraint.noOfDaysPerWeek; i++) {
-			for(int j=0; j<Constraint.noOfHoursPerDay; j++) {
+		for(int i=0; i<constraint.getNoOfDaysPerWeek(); i++) {
+			for(int j=0; j<constraint.getNoOfHoursPerDay(); j++) {
 				data.addTimeSlot(createTimeSlot(Constraint.days[i],Constraint.lectureTimes[j]));
 			}
 		}

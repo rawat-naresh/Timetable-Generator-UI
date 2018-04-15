@@ -1,9 +1,13 @@
 package com.timetable.ui.data;
+import java.io.IOException;
+
 import com.jfoenix.controls.JFXButton;
 import com.timetable.ui.main.ResourceInitializer;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 
 
 
@@ -41,8 +45,15 @@ public class DataSidebarUIController {
 
     @FXML
     void showBasicUI(MouseEvent event) {
-    	ResourceInitializer.mainUI.setCenter(ResourceInitializer.basicInfoUI);
-    	ResourceInitializer.mainUI.setRight(null);
+    	try {
+			VBox basicInfoUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/basicInfoUI.fxml"));
+			ResourceInitializer.mainUI.setCenter(basicInfoUI);
+	    	ResourceInitializer.mainUI.setRight(null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
     }
 
     @FXML

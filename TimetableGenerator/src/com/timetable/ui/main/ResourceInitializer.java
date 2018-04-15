@@ -57,7 +57,7 @@ public class ResourceInitializer {
 			roomListUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/roomListUI.fxml"));
 			addRoomUI = (AnchorPane)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/addRoomUI.fxml"));
 			addCourseUI = (HBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/studentListUI.fxml"));
-			basicInfoUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/basicInfoUI.fxml"));
+			//basicInfoUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/basicInfoUI.fxml"));
 			activityListUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/activityListUI.fxml"));
 			addActivityUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/addActivityUI.fxml"));
 			listTeacherConstraintUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/constraint/listTeacherConstraintUI.fxml"));

@@ -24,8 +24,10 @@ public class Algorithm {
 	Data data;
 	Distribution distribution;
 	TimeConstraint timeConstraint;
+	Constraint constraint;
 	public Algorithm(){
 		data = Data.getInstance();
+		constraint = Constraint.getInstance();
 		timeConstraint  = TimeConstraint.getInstance();
 		distribution = Distribution.getInstance();
 	}
@@ -85,7 +87,7 @@ public class Algorithm {
 				
 				//checking whether the number of consecutive cells, equal to totalDuration, are empty or not.
 				
-				if(limit <= Constraint.noOfHoursPerDay ) {
+				if(limit <= constraint.getNoOfHoursPerDay()) {
 					
 					for(int i = c; i <= limit ; i++) {
 						TimetableCell currentCell = row.getCell(i);
@@ -368,10 +370,10 @@ public class Algorithm {
 		//ArrayList<Integer[]> rowswithLab = new ArrayList<>();
 		//ArrayList<Integer[]> rowswithEmptySlots = new ArrayList<>();
 
-		for(int r=1; r <= Constraint.noOfDaysPerWeek; r++) {
+		for(int r=1; r <= constraint.getNoOfDaysPerWeek(); r++) {
 			TimetableRow row = sheet.getRow(r);
 			System.out.println("--");
-			for(int c=1; c <= Constraint.noOfHoursPerDay; c++) {
+			for(int c=1; c <= constraint.getNoOfHoursPerDay(); c++) {
 				TimetableCell cell = row.getCell(c);
 				//System.out.println(c);
 				//System.out.println(cell.getType());
