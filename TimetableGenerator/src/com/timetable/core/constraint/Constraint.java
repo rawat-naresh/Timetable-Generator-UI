@@ -30,9 +30,9 @@ public class Constraint implements Serializable {
     public static final int BREAK_TYPE = 1989;
     public static final int UNOCCUPIED_TYPE = 1999;
     
-    private int noOfHoursPerDay = 8;
-	private int noOfDaysPerWeek = 6;
-    private String collegeName = "QUANTUM UNIVERSITY";
+    private int noOfHoursPerDay;
+	private int noOfDaysPerWeek;
+    private String collegeName;
     
     public ArrayList<String> days = new ArrayList<>(7);
     public ArrayList<String> lectureTimes = new ArrayList<>(6);
@@ -81,8 +81,8 @@ public class Constraint implements Serializable {
 		return lectureTimes.get(index);
 	}
 
-	public void setLectureTime(String lectureTime) {
-		lectureTimes.add(lectureTime);
+	public void setLectureTimes(ArrayList<String> lectureTimes) {
+		this.lectureTimes = lectureTimes;
 	}
 
 	public int getNoOfHoursPerDay() {

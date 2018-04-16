@@ -19,10 +19,12 @@ import com.timetable.core.classes.TimeSlot;
  *
  */
 public class Data {
+	private int subjectCount = 0;
+	
+
 	private int roomKey = 0;
 	private int timeSlotKey = 0;
 	private static  Data instance = null;
-   // private static String institutionName = "Quantum Global Campus";
     private ArrayList<Teacher> teachers;
     private ArrayList<Student> students;
     private ArrayList<Subject> subjects;
@@ -54,6 +56,15 @@ public class Data {
     	}
     	return instance;
     }
+    
+    public int getSubjectCount() {
+		return subjectCount;
+	}
+
+	public void setSubjectCount(int subjectCount) {
+		this.subjectCount = subjectCount;
+	}
+    
     public void addTimeSlot(TimeSlot ts) {
     	timeslots.put(timeSlotKey++, ts);
     }

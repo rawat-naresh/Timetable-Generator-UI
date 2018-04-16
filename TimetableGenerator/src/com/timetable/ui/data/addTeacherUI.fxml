@@ -7,34 +7,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="addNewSubject" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="19.0" layoutY="47.0" prefHeight="39.0" prefWidth="226.0" text="Subject Code">
+      <Label layoutX="19.0" layoutY="47.0" prefHeight="39.0" prefWidth="226.0" text="Teacher Name">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="2.0" prefHeight="40.0" prefWidth="290.0" text="Add New Subject" underline="true">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="2.0" prefHeight="40.0" prefWidth="290.0" text="Add New Teacher" underline="true">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="19.0" layoutY="86.0" prefHeight="45.0" prefWidth="282.0" promptText="Subject Code eg: TCH102">
+      <TextField fx:id="nameTextField" layoutX="19.0" layoutY="86.0" prefHeight="45.0" prefWidth="282.0" promptText="Teacher Name">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <Label layoutX="19.0" layoutY="149.0" prefHeight="39.0" prefWidth="226.0" text="Subject Name">
+      <Label layoutX="19.0" layoutY="149.0" prefHeight="39.0" prefWidth="226.0" text="Teaching Hours">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="19.0" layoutY="188.0" prefHeight="45.0" prefWidth="282.0" promptText="Subject Name">
+      <TextField fx:id="hourTextField" layoutX="19.0" layoutY="188.0" prefHeight="45.0" prefWidth="282.0" promptText="Teaching hours">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="61.0" layoutY="302.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="187.0" text="Add Subject">
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="61.0" layoutY="302.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="187.0" text="Add Teacher">
          <font>
             <Font size="18.0" />
          </font>

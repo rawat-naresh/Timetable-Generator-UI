@@ -35,19 +35,19 @@ public class BasicInfoUIController implements Initializable {
     private Button addDaysButton;
 
     @FXML
-    private ListView<?> hoursList;
+    private ListView<String> hoursList;
 
 
     @FXML
     private Button addHoursButton;
+    private Constraint constraint = Constraint.getInstance();
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
-		collegeName.setText(Constraint.getInstance().getCollegeName());
-		daysList.getItems().addAll(Constraint.getInstance().getDays());
-		
-		
-		
+    	
+		collegeName.setText(constraint.getCollegeName());
+		daysList.getItems().addAll(constraint.getDays());
+		hoursList.getItems().addAll(constraint.getLectureTimes());	
 	}
 
     @FXML
@@ -58,7 +58,7 @@ public class BasicInfoUIController implements Initializable {
 
     @FXML
     void addHours(ActionEvent event) {
-    	displayNewWindow("/com/timetable/ui/data/daysPickerUI.fxml", "Add Hours");
+    	displayNewWindow("/com/timetable/ui/data/timePickerUI.fxml", "Add Hours");
     }
 
     @FXML

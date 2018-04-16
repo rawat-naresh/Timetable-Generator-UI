@@ -5,13 +5,16 @@
  */
 package com.timetable.core.classes;
 
+import java.io.Serializable;
 
 /**
  * @author Naresh
  *
  */
-public class Subject {
-    private String name;
+public class Subject implements Serializable {
+    
+	private static final long serialVersionUID = 2L;
+	private String name;
     private int subjectId;
     private boolean hasConstraint = false;
 

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="rootContainer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="692.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timetable.ui.data.BasicInfoUIController">
+<VBox fx:id="rootContainer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="692.0" stylesheets="@../../../../css/listview.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timetable.ui.data.BasicInfoUIController">
    <children>
       <Label fx:id="collegeName" alignment="CENTER" prefHeight="49.0" prefWidth="600.0" text="ABC University">
          <font>
@@ -25,7 +25,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="daysList" prefHeight="338.0" prefWidth="368.0" />
+                  <ListView fx:id="daysList" prefHeight="338.0" prefWidth="368.0" styleClass="list-cell" />
                   <HBox prefHeight="45.0" prefWidth="330.0">
                      <children>
                         <Button fx:id="addDaysButton" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addDays" prefHeight="45.0" prefWidth="368.0" text="Add Days">
@@ -50,7 +50,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="hoursList" prefHeight="338.0" prefWidth="276.0" />
+                  <ListView fx:id="hoursList" prefHeight="338.0" prefWidth="276.0" styleClass="list-cell" />
                   <HBox prefHeight="45.0" prefWidth="330.0">
                      <children>
                         <Button fx:id="addHoursButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addHours" prefHeight="45.0" prefWidth="368.0" text="Add Hours">

@@ -1,17 +1,20 @@
 package com.timetable.ui.data;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import com.timetable.core.constraint.Constraint;
 import com.timetable.ui.main.ResourceInitializer;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class DaysPickerUIController {
+public class DaysPickerUIController implements Initializable {
 	
 	@FXML
     private VBox rootContainer;
@@ -30,6 +33,37 @@ public class DaysPickerUIController {
 	private CheckBox fri;
 	@FXML
 	private CheckBox sat;
+	
+	private Constraint constraint = Constraint.getInstance();
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		for(String day: constraint.getDays()) {
+			switch(day) {
+			case "Sunday" :
+				sun.setSelected(true);
+				break;
+			case "Monday" :
+				mon.setSelected(true);
+				break;
+			case "Tuesday" :
+				tue.setSelected(true);
+				break;
+			case "Wednesday" :
+				wed.setSelected(true);
+			case "Thursday":
+				thu.setSelected(true);
+				break;
+			case "Friday":
+				fri.setSelected(true);
+				break;
+			case "Saturdau":
+				sat.setSelected(true);
+				break;
+				
+			}
+		}
+	}
 	
     @FXML
     void saveDays(ActionEvent event) {
@@ -58,5 +92,7 @@ public class DaysPickerUIController {
     	new DataSidebarUIController().loadUI(ResourceInitializer.basicInfoUI, null);
     	
     }
+
+
 
 }
