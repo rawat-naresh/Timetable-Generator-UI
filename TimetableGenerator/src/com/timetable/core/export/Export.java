@@ -92,7 +92,7 @@ public class Export {
 		c.setCellValue("DAYS/TIMES");
 		for(int i=0;i<constraint.getNoOfHoursPerDay();i++) {
 			Cell timeCell = timesRow.createCell(i+1);
-			timeCell.setCellValue(Constraint.lectureTimes[i]);
+			timeCell.setCellValue(constraint.getLectureTime(i));//modified here later
 			timeCell.setCellStyle(style);
 		}
 	}
@@ -109,7 +109,7 @@ public class Export {
 	private void createActivityCells(Sheet sheet, Row activityRow,HashMap<Integer,TimetableCell> cells,int k) {
 		Cell dayCell = activityRow.createCell(0);
 		sheet.autoSizeColumn(0);
-		dayCell.setCellValue(Constraint.days[k-1]);
+		dayCell.setCellValue(constraint.getDay(k-1));//modified here later
 		dayCell.setCellStyle(style);
 		int flag=0;
 		

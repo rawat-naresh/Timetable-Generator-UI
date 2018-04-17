@@ -39,12 +39,6 @@ public class Inputs {
 		
 		timeConstraint.setWeightage(50);
 		
-		//creating timeslots
-		for(int i=0; i<constraint.getNoOfDaysPerWeek(); i++) {
-			for(int j=0; j<constraint.getNoOfHoursPerDay(); j++) {
-				data.addTimeSlot(createTimeSlot(Constraint.days[i],Constraint.lectureTimes[j]));
-			}
-		}
 		
 		
 		//creating subjects
@@ -353,11 +347,7 @@ public class Inputs {
 		}
 	}
 	
-	public TimeSlot createTimeSlot(String day,String time) {
-		TimeSlot ts = new TimeSlot(day,time);
-		return ts;
-	}
-	
+
 
     public Subject createSubject(int subjectId,String subjectName){
     	

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="subjectInfo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="rootContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="620.0" stylesheets="@../../../../css/listview.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timetable.ui.data.SubjectListUIController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="600.0" text="Subject Information" underline="true">
          <font>
@@ -17,12 +17,12 @@
             <Insets left="15.0" />
          </VBox.margin>
       </Label>
-      <TableView fx:id="sibjectTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+      <TableView fx:id="subjectTable" styleClass="table-cell" stylesheets="@../../../../css/tableview.css">
          <columns>
-            <TableColumn fx:id="subjectId" prefWidth="86.0" text="Subject ID" />
-            <TableColumn fx:id="subjectCode" prefWidth="86.0" text="Subject Code" />
-            <TableColumn fx:id="subjectName" prefWidth="132.0" text="Subject Name" />
-            <TableColumn fx:id="hasConstraint" minWidth="0.0" prefWidth="128.0" text="Has Constriant" />
+            <TableColumn fx:id="subjectId" maxWidth="40.0" minWidth="40.0" prefWidth="-1.0" text="ID" />
+            <TableColumn fx:id="subjectCode" maxWidth="110.0" minWidth="110.0" prefWidth="-1.0" text="Subject Code" />
+            <TableColumn fx:id="subjectName" maxWidth="600.0" minWidth="210.0" prefWidth="210.0" text="Subject Name" />
+            <TableColumn fx:id="hasConstraint" maxWidth="221.0" minWidth="86.0" prefWidth="212.0" text="Has Constriant" />
          </columns>
          <VBox.margin>
             <Insets left="15.0" top="20.0" />

@@ -4,7 +4,6 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
@@ -18,13 +17,13 @@ public class ResourceInitializer {
 	static VBox mainConstraintUI;
 	static VBox mainGenerateUI;
 	static VBox introUI;
-	public static VBox teacherListUI;
-	public static AnchorPane addTeacherUI;
-	public static VBox subjectListUI;
-	public static AnchorPane addSubjectUI;
+	public static final String teacherListUI = "/com/timetable/ui/data/teacherListUI.fxml";
+	public static final String addTeacherUI = "/com/timetable/ui/data/addTeacherUI.fxml";
+	public static final String subjectListUI = "/com/timetable/ui/data/subjectListUI.fxml";
+	public static final String addSubjectUI = "/com/timetable/ui/data/addSubjectUI.fxml";
 	public static VBox roomListUI;
 	public static AnchorPane addRoomUI;
-	public static HBox addCourseUI;
+	public static final String addCourseUI = "/com/timetable/ui/data/studentListUI.fxml";
 	public static final String basicInfoUI = "/com/timetable/ui/data/basicInfoUI.fxml";
 	public static VBox activityListUI;
 	public static VBox addActivityUI;
@@ -46,13 +45,13 @@ public class ResourceInitializer {
 			mainConstraintUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/constraint/constraintSidebarUI.fxml"));
 			mainGenerateUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/generate/generateSidebarUI.fxml"));
 			introUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/file/introUI.fxml"));
-			teacherListUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/teacherListUI.fxml"));
-			addTeacherUI = (AnchorPane)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/addTeacherUI.fxml"));
-			subjectListUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/subjectListUI.fxml"));
-			addSubjectUI = (AnchorPane)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/addSubjectUI.fxml"));
+			//teacherListUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/teacherListUI.fxml"));
+			//addTeacherUI = (AnchorPane)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/addTeacherUI.fxml"));
+			//subjectListUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/subjectListUI.fxml"));
+			//addSubjectUI = (AnchorPane)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/addSubjectUI.fxml"));
 			roomListUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/roomListUI.fxml"));
 			addRoomUI = (AnchorPane)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/addRoomUI.fxml"));
-			addCourseUI = (HBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/studentListUI.fxml"));
+			//addCourseUI = (HBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/studentListUI.fxml"));
 			activityListUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/activityListUI.fxml"));
 			addActivityUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/data/addActivityUI.fxml"));
 			listTeacherConstraintUI = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/constraint/listTeacherConstraintUI.fxml"));

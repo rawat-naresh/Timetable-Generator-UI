@@ -57,7 +57,7 @@ public class DaysPickerUIController implements Initializable {
 			case "Friday":
 				fri.setSelected(true);
 				break;
-			case "Saturdau":
+			case "Saturday":
 				sat.setSelected(true);
 				break;
 				

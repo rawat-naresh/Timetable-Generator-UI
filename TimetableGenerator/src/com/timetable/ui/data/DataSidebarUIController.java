@@ -58,21 +58,22 @@ public class DataSidebarUIController {
 
     @FXML
     void showStudentsUI(MouseEvent event) {
-    	ResourceInitializer.mainUI.setCenter(ResourceInitializer.addCourseUI);
-    	ResourceInitializer.mainUI.setRight(null);
+    	
+    	loadUI(ResourceInitializer.addCourseUI, null);
     }
 
     @FXML
     void showSubjectsUI(MouseEvent event) {
-    	ResourceInitializer.mainUI.setCenter(ResourceInitializer.subjectListUI);
-    	ResourceInitializer.mainUI.setRight(ResourceInitializer.addSubjectUI);
+    	
+    	loadUI(ResourceInitializer.subjectListUI,ResourceInitializer.addSubjectUI);
+    	
     }
 
     @FXML
     void showTeachersUI(MouseEvent event) {
     	
-    	ResourceInitializer.mainUI.setCenter(ResourceInitializer.teacherListUI);
-    	ResourceInitializer.mainUI.setRight(ResourceInitializer.addTeacherUI);
+    	loadUI(ResourceInitializer.teacherListUI,ResourceInitializer.addTeacherUI);
+    	
     }
     
     public void loadUI(String centerLoc,String rightLoc) {

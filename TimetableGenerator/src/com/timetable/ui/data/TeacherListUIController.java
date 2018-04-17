@@ -3,6 +3,9 @@ package com.timetable.ui.data;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.timetable.core.classes.Teacher;
+import com.timetable.core.main.Data;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -36,25 +39,19 @@ public class TeacherListUIController implements Initializable {
     @FXML
     private TableColumn<Teacher,Boolean>  hasConstraint;
     
-    
-    
-    private ObservableList<Teacher> list = FXCollections.observableArrayList(
-    		new Teacher(1,"Naresh Rawat",6,false),
-    		new Teacher(2,"Nicolas Rawat",6,false),
-    		new Teacher(3,"Monkey D.Luffy",6,false),
-    		new Teacher(4,"Nick Jonas",6,false),
-    		new Teacher(5,"Perfect Strangers",6,false),
-    		new Teacher(6,"Naresh Rawat",6,false),
-    		new Teacher(7,"Naresh Rawat",6,false)
-    		);
+    private Data data =  Data.getInstance();
+	
+	private ObservableList<Teacher> list;
     
     
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		teacherId.setCellValueFactory(new PropertyValueFactory<Teacher,Integer>("teacherId"));
-		teacherName.setCellValueFactory(new PropertyValueFactory<Teacher,String>("teacherName"));
-		teachingHours.setCellValueFactory(new PropertyValueFactory<Teacher,Integer>("teachingHours"));
+		list = FXCollections.observableArrayList(data.getTeachers());
+		
+		teacherId.setCellValueFactory(new PropertyValueFactory<Teacher,Integer>("id"));
+		teacherName.setCellValueFactory(new PropertyValueFactory<Teacher,String>("name"));
+		teachingHours.setCellValueFactory(new PropertyValueFactory<Teacher,Integer>("targetNoHours"));
 		hasConstraint.setCellValueFactory(new PropertyValueFactory<Teacher,Boolean>("hasConstraint"));
 		
 		teacherTable.setItems(list);
