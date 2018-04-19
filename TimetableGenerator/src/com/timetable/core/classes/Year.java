@@ -34,5 +34,9 @@ public class Year {
 		return yearId;
 	}
 	
+	public String toString() {
+		return yearName;
+	}
+	
 	
 }

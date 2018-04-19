@@ -5,6 +5,8 @@
  */
 package com.timetable.core.classes;
 
+import java.util.ArrayList;
+
 /**
  * @author Naresh
  *
@@ -16,17 +18,35 @@ public class Activity {
     private int activityId;
     private String activityTag;//to identify whether the activity is lab or class.
     private int weightage = 0;
+    private ArrayList<Teacher> teachers;
+	private Student student;
+	private ArrayList<Subject> subjects;
 
-    
-    public Activity() {
-    	//default constructor
-    }
-    
-    public Activity(int duration,int totalDuration,int activityId,String activityTag) {
+ 
+    public Activity(ArrayList<Teacher> teachers, Student student, ArrayList<Subject> subjects,
+    		int duration,int totalDuration,int activityId,String activityTag) {
+    	
 		this.duration = duration;
         this.totalDuration = totalDuration;
         this.activityId = activityId;
         this.activityTag = activityTag;
+        
+        this.teachers = teachers;
+        this.subjects = subjects;
+        this.student = student;
+	}
+    
+    
+    public ArrayList<Teacher> getTeachers() {
+		return teachers;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public ArrayList<Subject> getSubjects() {
+		return subjects;
 	}
 
 	public int getDuration() {
@@ -52,5 +72,15 @@ public class Activity {
 	public void setWeightage(int weightage) {
 		this.weightage = weightage;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Activity [duration=" + duration + ", totalDuration=" + totalDuration + ", activityId=" + activityId
+				+ ", activityTag=" + activityTag + ", teachers=" + teachers + ", student=" + student + ", subjects="
+				+ subjects + "]";
+	}
+	
+	
    
 }

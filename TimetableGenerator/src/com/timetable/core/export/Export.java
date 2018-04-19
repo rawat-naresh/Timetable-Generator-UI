@@ -16,8 +16,9 @@ import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 
-import com.timetable.core.classes.LabActivity;
-import com.timetable.core.classes.LectureActivity;
+import com.timetable.core.classes.Activity;
+import com.timetable.core.classes.Subject;
+import com.timetable.core.classes.Teacher;
 import com.timetable.core.constraint.Constraint;
 import com.timetable.core.main.Data;
 import com.timetable.core.timetable.TimetableCell;
@@ -111,50 +112,44 @@ public class Export {
 		sheet.autoSizeColumn(0);
 		dayCell.setCellValue(constraint.getDay(k-1));//modified here later
 		dayCell.setCellStyle(style);
-		int flag=0;
 		
 		for(int key : cells.keySet()) {
 			TimetableCell cell = cells.get(key);
 			int cellValue = cell.getValue();
-			//System.out.println(cellValue);
-			String outputString;
+			String cellType = cell.getType();
 			Cell c = activityRow.createCell(key);
 			
 			c.setCellStyle(style);
 			sheet.autoSizeColumn(key);
-			if(cell.getType() == Constraint.BREAK_TYPE) {
+			
+				
+			if(cellType == Constraint.LECTURE_TYPE || cellType == Constraint.LAB_TYPE) {
+				Activity activity = data.getSortedActivities().get(cellValue);
+				sheet.addMergedRegion(new CellRangeAddress(k, k, key, key-1+activity.getDuration()));
+				String teachers="";
+				String subjects = "";
+				String subgroup = "";
+				for(Teacher t: activity.getTeachers())
+					teachers+= "  "+t.getName();
+				
+				for(Subject s: activity.getSubjects())
+					subjects+= "  "+s.getName();
+				
+				for(String sub:activity.getStudent().getSubGroups())
+					subgroup+="  "+sub;
+				
+				key = key + activity.getDuration();
+				
+			
+				c.setCellValue(teachers+"\n"+subjects+"\n"+subgroup);
+			}
+				
+			
+			
+			else if(cellType == Constraint.BREAK_TYPE) 
 				c.setCellValue("BREAK");
-			}
 			
-			else if(data.getSortedLectureActivities().containsKey(cellValue)) {
-				LectureActivity la = data.getSortedLectureActivities().get(cellValue);
-				outputString = la.getSubject().getName()+"\n"+la.getTeacher().getName();
-				c.setCellValue(outputString);
-			}
-			else if(data.getSortedLabActivities().containsKey(cellValue)) {
-				flag++;
-				if(flag %2 != 0) {
-					LabActivity la = data.getSortedLabActivities().get(cellValue);
-					//@param key always starts from 1
-					
-					sheet.addMergedRegion(new CellRangeAddress(k, k, key, key-1+la.getDuration()));
-					String t1,t2,s1,s2,sg1,sg2;
-					s1 = la.getSubjects().get(0).getName();
-					s2 = la.getSubjects().get(1).getName();
-					t1 = la.getTeachers().get(0).getName();
-					t2 = la.getTeachers().get(1).getName();
-					sg1 = la.getStudent().getSubGroups().get(0);
-					sg2 = la.getStudent().getSubGroups().get(1);
-					
-					c.setCellValue(s1+", "+t1+", "+sg1+"\n"+s2+", "+t2+", "+sg2);
-					
-				}
-				//control enters here when it is labActivity.
-				//for lab activity we need to merge number of cells according to the given duration
 			
-				
-				
-			}
 		}
 		
 		

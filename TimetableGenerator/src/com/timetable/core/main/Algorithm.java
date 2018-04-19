@@ -2,10 +2,7 @@ package com.timetable.core.main;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-
-import com.timetable.core.classes.LabActivity;
-import com.timetable.core.classes.LectureActivity;
+import com.timetable.core.classes.Activity;
 import com.timetable.core.classes.Student;
 import com.timetable.core.classes.Teacher;
 import com.timetable.core.constraint.Constraint;
@@ -40,50 +37,40 @@ public class Algorithm {
 		
 		
 		
-		data.getSortedLabActivities().forEach((k,labActivity)->{
-			int studentId = labActivity.getStudent().getGroupId();
+		data.getSortedActivities().forEach((k,activity)->{
+			int studentId = activity.getStudent().getGroupId();
 			TimetableSheet sheet = distribution.getTimetableSheet(studentId);
-			findLabTimeSlot(k, labActivity, sheet );
+			findTimeSlot(k, activity, sheet );
 			
 			
 			
 			
 		});
 		
-		/*data.getSortedLectureActivities().forEach((activityKey,lectureActivity)->{
-			int studentId = lectureActivity.getStudent().getGroupId();
-			TimetableSheet sheet = distribution.getTimetableSheet(studentId);
-			
-			findLectureTimeSlot(0,activityKey, lectureActivity, sheet);
-		
-			
-		});
-		*/
-		
-		for(Integer activityKey:data.getSortedLectureActivities().keySet()) {
-			LectureActivity lectureActivity = data.getLectureActivity(activityKey);
-			int studentId = lectureActivity.getStudent().getGroupId();
-			TimetableSheet sheet = distribution.getTimetableSheet(studentId);
-			
-			findLectureTimeSlot(0,activityKey, lectureActivity, sheet);
-			
-		}
+
 		
 		
 	}
 	
-	private int findLabTimeSlot(Integer activityKey, LabActivity lab, TimetableSheet sheet) {
-		int duration = lab.getDuration();
+	private int findTimeSlot(Integer activityKey, Activity activity, TimetableSheet sheet) {
+		int duration = activity.getDuration();
+		
+		//HashMap<Integer,int[]> cellConflicts = new HashMap<>();//for adding conflicts
+		
 		ArrayList<Integer[]> finalRowColOfCells = new ArrayList<>();
 		for (Integer r : sheet.getRows().keySet()) {
 			TimetableRow row =  sheet.getRows().get(r);
 			ArrayList<Integer> startIndexOfCells = new ArrayList<>();
 			boolean rowHasLab = false;
+			//added later
+			int occurrence = 0;
 			
 			for(Integer c :row.getCells().keySet() ) {
 				
 				int consecutiveEmptycells = 0;
 				int limit = c+duration-1;
+				
+				
 				
 				//checking whether the number of consecutive cells, equal to totalDuration, are empty or not.
 				
@@ -91,20 +78,27 @@ public class Algorithm {
 					
 					for(int i = c; i <= limit ; i++) {
 						TimetableCell currentCell = row.getCell(i);
-						int currentCellType = currentCell.getType();
+						String currentCellType = currentCell.getType();
 						if(currentCell.isEmpty()) {
 							consecutiveEmptycells++;
 						}
 						
-						else if( currentCell.isActive() && currentCellType == Constraint.LAB_TYPE ) {
-							rowHasLab = true;
-							break;
-	
+						else if(currentCell.isActive()) {
+							//current cell contains either lab or lecture
+							if(currentCellType == Constraint.LAB_TYPE) {
+								rowHasLab = true;
+								break;
+							}
+							else if(data.getSortedActivity(currentCell.getValue()).getActivityId() == activity.getActivityId()) {
+								//current cell containts lecture with same activityId
+								
+								occurrence++;
+								break;
+							}
 						}
 						
-						else  {
-							//we encounter a break cell
-							//or we found non empty lecture slot
+						else {
+							//current cell contains break
 							break;
 						}
 							
@@ -114,7 +108,7 @@ public class Algorithm {
 				
 				
 				/*if this row has labActivity, then skip to the next row*/
-				if(rowHasLab) {
+				if(rowHasLab || occurrence > 0) {
 					
 					break;
 				}
@@ -132,7 +126,7 @@ public class Algorithm {
 			
 			//outside of cell loop
 			
-			if(!rowHasLab) {
+			if(!rowHasLab && occurrence == 0) {
 				for(Integer c:startIndexOfCells)
 					finalRowColOfCells.add(new Integer[] {r,c});
 				
@@ -148,7 +142,7 @@ public class Algorithm {
 		for(Integer[] rowColArray : finalRowColOfCells) {
 			int r = rowColArray[0];
 			int c = rowColArray[1];
-			int[] conflict = calculateLabConflict(r, c, lab);
+			int[] conflict = calculateConflict(r, c, activity);
 			
 			if(conflict[1] == 0) {
 				TimetableRow row = sheet.getRow(r);
@@ -156,14 +150,26 @@ public class Algorithm {
 					TimetableCell cell = row.getCell(i);
 					cell.setValue(activityKey);
 					cell.setEmpty(false);
-					cell.setType(Constraint.LAB_TYPE);
+					cell.setType(activity.getActivityTag());
 				}
+				
+				//clear the cellConclicts list, because we found the conflictless cell for this activity
+				//cellConflicts.clear();
+				
+				//return successs
+				//move to the next activity in sortedList
+				
+				
 				
 				return 1;
 				
 			}
 			else {
 				//insert it into a conflictlist
+				
+				//found conflict
+				//add this cell to the cellConflict list with conflict value
+				//cellConflicts.put(conflict[1],conflict[0]);
 			}
 		}
 		
@@ -175,15 +181,15 @@ public class Algorithm {
 	
 	
 	
-	private int[] calculateLabConflict(int row,int cell,LabActivity labActivity) {
+	private int[] calculateConflict(int row,int cell,Activity activity) {
 		//ArrayList<Teacher> teachers = labActivity.getTeachers();
-		int duration = labActivity.getDuration();
+		int duration = activity.getDuration();
 		int limit = cell+duration-1;
 		int conflict = 0;
 		int[] sheetConflict = new int[2];
 
 		
-		for(Teacher teacher : labActivity.getTeachers()) {
+		for(Teacher teacher : activity.getTeachers()) {
 			int currentTeacherId = teacher.getId();
 			for(Student student : teacher.getAllocatedStudent()) {
 				int studentId = student.getGroupId();
@@ -197,31 +203,21 @@ public class Algorithm {
 					if(!c.isEmpty() && c.isActive()) {
 						
 						int activityKey = c.getValue();
-						if(c.getType() == Constraint.LAB_TYPE) {
-							//activityType = 1; //indicates lab
-							LabActivity anotherLab = data.getLabActivity(activityKey);
-							ArrayList<Teacher> anotherTeachers = anotherLab.getTeachers();
-							for(Teacher anotherTeacher: anotherTeachers) {
-								if(currentTeacherId == anotherTeacher.getId()) {
-									conflict = conflict + 1;
-									break;
-								}
-							}
+						
+						
+						for(Teacher t : data.getSortedActivity(activityKey).getTeachers()) {
 							
-						}
-					
-						else{
-							
-							LectureActivity anotherLecture = data.getLectureActivity(activityKey);
-							if(currentTeacherId == anotherLecture.getTeacher().getId()) {
-								conflict = conflict + 1;
+							if(currentTeacherId == t.getId()) 
 								
-							}
+								conflict = conflict + 1;
+							
 						}
+						
 						
 					}
 						
 				}
+				
 				if(conflict > 0) {
 					sheetConflict[1] = conflict;
 					break;
@@ -264,108 +260,9 @@ public class Algorithm {
 	
 
 	
-	private boolean findLectureTimeSlot(int recursion_count, Integer activityKey, LectureActivity lecture,TimetableSheet sheet) {
-		//defining base condition for recursion
-		/*if(recursion_count == 0) {
-			return false;
-		}
-		else {*/
-			
-			//find timeslot for lecture
-			int teacherId = lecture.getTeacher().getId();
-			int activityId = lecture.getActivityId();
-			//int duration = lecture.getDuration();
-			int maxNoOfLecturesPerDay = lecture.getSubject().getMaxNumOfLecturesPerDay();
-			
-			ArrayList<Student> students = lecture.getTeacher().getAllocatedStudent();
-			HashMap<Integer,int[]> cellConflicts = new HashMap<>();
-			
-			
-			for (Integer r : sheet.getRows().keySet()) {
-				TimetableRow row =  sheet.getRows().get(r);
-				ArrayList<Integer> emptySlots = new ArrayList<>();
-				int occurrence = 0;
-				for(Integer c :row.getCells().keySet() ) {
-					TimetableCell cell = row.getCell(c);
-					
-					if(cell.isEmpty() ) {
-						emptySlots.add(c);
-					}
 	
-					else if( cell.isActive() ) {
-						int currentActivityId ;
-						if(cell.getType() == Constraint.LECTURE_TYPE)
-							currentActivityId = data.getLectureActivity(cell.getValue()).getActivityId();
-						else
-							currentActivityId = data.getLabActivity(cell.getValue()).getActivityId();
-						
-						
-						if(currentActivityId == activityId) {
-							occurrence = occurrence+1;
-						}
-						//active cell are reserved and do not participate in timetable ,break slots are not considered as active
-						//cell is not empty
-						//increase the no's occurrence of activity	
-						
-						
-						
-					}
-					
-				}
-				
-				//randomly shuffling all the empty slots
-				Collections.shuffle(emptySlots);
-				
-				if(occurrence < maxNoOfLecturesPerDay && emptySlots.size() > 0) {
-					for(Integer c : emptySlots) {
-						
-						int[] sheetConflict = calculateLectureConflict(r,c,teacherId,students );
-						if(sheetConflict[1] == 0) {
-							//put activity in this slot
-							TimetableCell noConflictCell = row.getCell(c);
-							noConflictCell.setValue(activityKey);
-							noConflictCell.setEmpty(false);
-							noConflictCell.setType(Constraint.LECTURE_TYPE);
-							System.out.println("Activity Placed : "+data.getLectureActivity(activityKey).getStudent().getGroupName()+" : "+data.getLectureActivity(activityKey).getSubject().getName());
-							
-							//clear the cellConclicts list, because we found the conflictless cell for this activity
-							cellConflicts.clear();
-							
-							//return successs
-							//move to the next activity in sortedList
-							return true;
-							//since we have found appropriate slot,this 'return' will end the function with return value 1 i.e success.
-						}
-						else {
-							//System.out.println("adding conflict");
-							//found conflict
-							//add this cell to the cellConflict list with conflict value
-							cellConflicts.put(sheetConflict[0],sheetConflict);
-						}
-						
-					}
-
-					
-				}
-				
-				
-			}
-			
-			
-			
-
-			System.out.println("----FAILED---"+data.getLectureActivity(activityKey).getStudent().getGroupName()+" : "+data.getLectureActivity(activityKey).getSubject().getName());
-			//swapActivities(sheet);
-			
-			return false;
-
-			
-			
-		//}
-		
-	}
 	
-	private boolean swapActivities(TimetableSheet sheet) {
+	/*private boolean swapActivities(TimetableSheet sheet) {
 		System.out.println("swap");
 		//ArrayList<Integer[]> rowswithLab = new ArrayList<>();
 		//ArrayList<Integer[]> rowswithEmptySlots = new ArrayList<>();
@@ -380,16 +277,16 @@ public class Algorithm {
 				if(cell.isEmpty()) {
 					//rowswithEmptySlots.add(new Integer[] {r,c});
 					System.out.println("empty");
-				}/*
+				}
 				else if(cell.getType() == Constraint.LAB_TYPE) {
 					rowswithLab.add(new Integer[] {r,c});
 					break;
-				}*/
+				}
 				
 			}
 		}
 		
-		/*
+		
 		for(Integer[] a :rowswithLab) {
 			System.out.println(a[0]+" "+a[1]);
 		}
@@ -398,49 +295,11 @@ public class Algorithm {
 			System.out.println(a[0]+" "+a[1]);
 		}
 		
-		*/
+		
 		return false;
 	}
 
 	
-	private int[] calculateLectureConflict(int r, int c, int teacherId,ArrayList<Student> students) {
-		int[] sheetConflict = new int[4];
-		
-		for(Student student:students) {
-			int studentId = student.getGroupId();
-			TimetableSheet s = distribution.getTimetableSheet(studentId);
-			TimetableCell cell = s.getRow(r).getCell(c);
-			//we are checking for only one conflict ,i.e a teacher shouldn't teach multiple students at same day/time.
-			
-			
-			if(!cell.isEmpty()) {
-				
-				ArrayList<Integer> teachersId = new ArrayList<>(2) ;
-				if(cell.getType() == Constraint.LECTURE_TYPE)
-					teachersId.add(data.getLectureActivity(cell.getValue()).getTeacher().getId());
-				else
-					data.getLabActivity(cell.getValue()).getTeachers().forEach(teacher->{
-						teachersId.add(teacher.getId());
-					});
-				
-				
-				for(int id: teachersId) {
-					if(teacherId == id) {
-						sheetConflict[0] = studentId;
-						sheetConflict[1] = sheetConflict[0]+1;
-						sheetConflict[2] = r;
-						sheetConflict[3] = c;
-					}
-				}
-				
-			}
-	
-			
-		}
-		
-		return sheetConflict;
-		
-
-	}
+	*/
 	
 }

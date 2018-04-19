@@ -19,8 +19,7 @@ public class Generate {
 		Data data = Data.getInstance();
 		
 		Constraint constraint = Constraint.getInstance();
-		constraint.computeLabWeightage(data.getLabActivities());
-		constraint.computeLectureWeightage(data.getLectureActivities());
+		constraint.computeActivityWeightage(data.getActivities());
 		
 	/*
 		

@@ -39,40 +39,40 @@ public class DataSidebarUIController {
 
     @FXML
     void showActivityUI(MouseEvent event) {
-    	ResourceInitializer.mainUI.setCenter(ResourceInitializer.activityListUI);
-    	ResourceInitializer.mainUI.setRight(ResourceInitializer.addActivityUI);
+    	loadUI("/com/timetable/ui/data/activityUI.fxml", null);
+    	//ResourceInitializer.mainUI.setCenter(ResourceInitializer.activityListUI);
+    	//ResourceInitializer.mainUI.setRight(ResourceInitializer.addActivityUI);
     }
 
     @FXML
     void showBasicUI(MouseEvent event) {
+    	
     	loadUI("/com/timetable/ui/data/basicInfoUI.fxml",null);
     	
     }
 
     @FXML
     void showSpaceUI(MouseEvent event) {
-
-    	ResourceInitializer.mainUI.setCenter(ResourceInitializer.roomListUI);
-    	ResourceInitializer.mainUI.setRight(ResourceInitializer.addRoomUI);
+    	loadUI(ResourceInitializer.roomUI,null);
+    	
     }
 
     @FXML
     void showStudentsUI(MouseEvent event) {
-    	
-    	loadUI(ResourceInitializer.addCourseUI, null);
+    	loadUI(ResourceInitializer.studentUI, null);
     }
 
     @FXML
     void showSubjectsUI(MouseEvent event) {
     	
-    	loadUI(ResourceInitializer.subjectListUI,ResourceInitializer.addSubjectUI);
+    	loadUI(ResourceInitializer.subjectUI,null);
     	
     }
 
     @FXML
     void showTeachersUI(MouseEvent event) {
     	
-    	loadUI(ResourceInitializer.teacherListUI,ResourceInitializer.addTeacherUI);
+    	loadUI(ResourceInitializer.teacherUI,null);
     	
     }
     

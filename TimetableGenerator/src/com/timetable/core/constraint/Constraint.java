@@ -7,8 +7,8 @@ package com.timetable.core.constraint;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import com.timetable.core.classes.LabActivity;
-import com.timetable.core.classes.LectureActivity;
+
+import com.timetable.core.classes.Activity;
 
 
 /**
@@ -25,9 +25,9 @@ public class Constraint implements Serializable {
     public static final int TIME_CONSTRAINT = 50;
     public static final int SPACE_CONSTRAINT = 50;
     public static int totalWeight=0;
-    public static final int LAB_TYPE = 1996;
-    public static final int LECTURE_TYPE = 1997;
-    public static final int BREAK_TYPE = 1989;
+    public static final String LAB_TYPE = "(L)";
+    public static final String LECTURE_TYPE = "(T)";
+    public static final String BREAK_TYPE = "(B)";
     public static final int UNOCCUPIED_TYPE = 1999;
     
     private int noOfHoursPerDay;
@@ -109,7 +109,7 @@ public class Constraint implements Serializable {
 		this.collegeName = collegeName;
 	}
     
-    public void computeLabWeightage(ArrayList<LabActivity> a) {
+    public void computeActivityWeightage(ArrayList<Activity> a) {
     	
     	a.forEach((v)-> {
     		
@@ -140,23 +140,7 @@ public class Constraint implements Serializable {
     	
     }
     
-    public void computeLectureWeightage(ArrayList<LectureActivity> a) {
-    	
-    	a.forEach((v)->{
-    		if(v.getTeacher().isHasConstraint())
-    			totalWeight+=TIME_CONSTRAINT;
-    		
-    		
-    		if(v.getStudent().isHasConstraint())
-    			totalWeight+=TIME_CONSTRAINT;
-    		
-    		if(v.getSubject().isHasConstraint())
-    			totalWeight+=SPACE_CONSTRAINT;
-    		
-    		v.setWeightage(totalWeight);
-    		totalWeight = 0;
-    	});
-    }
+    
     
     
 }

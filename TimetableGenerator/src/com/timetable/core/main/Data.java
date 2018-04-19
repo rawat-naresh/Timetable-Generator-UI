@@ -4,14 +4,15 @@ package com.timetable.core.main;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.timetable.core.classes.Activity;
+import com.timetable.core.classes.Branch;
 import com.timetable.core.classes.Course;
-import com.timetable.core.classes.LabActivity;
-import com.timetable.core.classes.LectureActivity;
 import com.timetable.core.classes.Room;
 import com.timetable.core.classes.SortActivities;
 import com.timetable.core.classes.Student;
 import com.timetable.core.classes.Subject;
 import com.timetable.core.classes.Teacher;
+import com.timetable.core.classes.Year;
 
 
 /**
@@ -19,22 +20,24 @@ import com.timetable.core.classes.Teacher;
  *
  */
 public class Data {
-	private int subjectCount = 0;
-	private int teacherCount = 0;
+	private int subjectKey = 0;
+	private int teacherKey = 0;
 	private int roomKey = 0;
 	private int coursekey = 100;
 	private int branchKey = 300;
 	private int yearKey = 500;
+	private int studentKey = 5000;
+	private int activityKey = 10000;
 	
 	private static  Data instance = null;
     private ArrayList<Teacher> teachers;
     private ArrayList<Student> students;
     private ArrayList<Subject> subjects;
     private HashMap<Integer,Room> rooms;
-    private ArrayList<LectureActivity> lectureActivities;
-    private ArrayList<LabActivity> labActivities;
-    private HashMap<Integer,LectureActivity> sortedLectureActivities;
-    private HashMap<Integer,LabActivity> sortedLabActivities;
+    private ArrayList<Activity> activities;
+    //private ArrayList<LabActivity> labActivities;
+    private HashMap<Integer,Activity> sortedActivities;
+    //private HashMap<Integer,LabActivity> sortedLabActivities;
     private ArrayList<Course> courses;
 
         
@@ -43,12 +46,14 @@ public class Data {
     }
     
     private void initialize(){
+    	
         teachers = new ArrayList<>();
         students = new ArrayList<>();
         subjects = new ArrayList<>();
-        lectureActivities = new ArrayList<>();
-        labActivities = new ArrayList<>();
+        activities = new ArrayList<>();
+        //labActivities = new ArrayList<>();
         courses = new ArrayList<>();
+        rooms = new HashMap<>();
         
     }
     
@@ -86,28 +91,26 @@ public class Data {
 	}
 
 	public int getSubjectCount() {
-		return subjectCount;
+		return subjectKey;
 	}
 
 	public void setSubjectCount(int subjectCount) {
-		this.subjectCount = subjectCount;
+		this.subjectKey = subjectCount;
 	}
 	
 	public int getTeacherCount() {
-		return teacherCount;
+		return teacherKey;
 	}
 
 	public void setTeacherCount(int teacherCount) {
-		this.teacherCount = teacherCount;
+		this.teacherKey = teacherCount;
 	}
     
     
-    public void addLectureActivity(LectureActivity activity){
-        lectureActivities.add(activity);
+    public void addActivity(Activity activity){
+        activities.add(activity);
     }
-    public void addLabActivity(LabActivity activity){
-        labActivities.add(activity);
-    }
+    
     
     public void addSubject(Subject subject){
         subjects.add(subject);
@@ -143,33 +146,29 @@ public class Data {
 	public HashMap<Integer, Room> getRooms() {
 		return rooms;
 	}
+	
+	public Room getRoom(int k) {
+		return rooms.get(k);
+	}
 
-	public ArrayList<LabActivity> getLabActivities() {
-		return labActivities;
+	public ArrayList<Activity> getActivities() {
+		return activities;
 	}
-	public ArrayList<LectureActivity> getLectureActivities() {
-		return lectureActivities;
-	}
+
 	
 
-	public HashMap<Integer,LabActivity> getSortedLabActivities(){
-		return sortedLabActivities;
+	public HashMap<Integer,Activity> getSortedActivities(){
+		return sortedActivities;
 	}
 	
-	public HashMap<Integer,LectureActivity> getSortedLectureActivities(){
-		return sortedLectureActivities;
+	
+	
+	public Activity getSortedActivity(int key) {
+		
+		return sortedActivities.get(key);
+		
 	}
 	
-	public LabActivity getLabActivity(int key) {
-		
-		return getSortedLabActivities().get(key);
-		
-	}
-	public LectureActivity getLectureActivity(int key) {
-		
-		return getSortedLectureActivities().get(key);
-		
-	}
 	
 	public ArrayList<Course> getCourses(){
 		
@@ -188,9 +187,64 @@ public class Data {
 	
 	public  void sortActivities() {
 		
-		sortedLectureActivities = SortActivities.sortLectureActivitiesWithWeightage(getLectureActivities());
-		sortedLabActivities = SortActivities.sortLabActivitiesWithWeightage(getLabActivities());
+		sortedActivities = SortActivities.sortActivitiesWithWeightage(getActivities());
 		
+	}
+	
+	
+	public int generateStudents() {
+		students.clear();
+		
+		/*new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+*/
+				int totalStudents=0;
+				for(int i=0; i< getCourses().size(); i++) {
+					
+					Course c = getCourse(i);
+					String cn = c.getCourseName();
+					
+					for(int j=0; j< c.getYears().size(); j++) {
+						
+						Year y = c.getYear(j);
+						String yn = y.getYearName();
+						
+						for(int k = 0;k< y.getBranches().size(); k++) {
+							
+							Branch b = y.getBranch(k);
+							String bn = b.getBranchName();
+							
+							for(int l = 0; l< b.getSections().size();l++) {
+								
+								addStudent(new Student(cn+"_"+yn+"_"+bn+"_"+b.getSection(l),y,b,studentKey++));
+								totalStudents++;
+								
+							}
+						}
+						
+					}
+					
+					
+				}
+		/*		
+			}
+			
+			
+		}).start();*/
+		
+		
+		
+		return totalStudents;
+	}
+
+	public int getActivityKey() {
+		return activityKey;
+	}
+
+	public void setActivityKey(int activityKey) {
+		this.activityKey = activityKey;
 	}
     
     

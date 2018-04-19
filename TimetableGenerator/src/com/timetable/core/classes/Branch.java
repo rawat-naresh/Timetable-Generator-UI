@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Branch {
 
-	ArrayList<String> sections;
+	ArrayList<Section> sections;
 	String branchName;
 	int branchId;
 	
@@ -15,14 +15,14 @@ public class Branch {
 				
 	}
 	
-	public void addSection(String sectionName) {
-		sections.add(sectionName);
+	public void addSection(Section section) {
+		sections.add(section);
 	}
 	
 	public String getBranchName() {
 		return branchName;
 	}
-	public String getSection(int i) {
+	public Section getSection(int i) {
 		return sections.get(i);
 	}
 
@@ -32,8 +32,12 @@ public class Branch {
 	}
 
 
-	public ArrayList<String> getSections(){
+	public ArrayList<Section> getSections(){
 		
 		return sections;
+	}
+	
+	public String toString() {
+		return branchName;
 	}
 }

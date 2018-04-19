@@ -59,6 +59,14 @@ public class Teacher {
 	public int getTargetNoHours() {
 		return targetNoHours;
 	}
+
+
+	@Override
+	public String toString() {
+		return name;
+	}
+	
+	
     
     
 

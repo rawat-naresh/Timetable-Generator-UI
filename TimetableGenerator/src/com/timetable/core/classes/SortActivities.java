@@ -16,13 +16,13 @@ public class SortActivities {
 	}
 	
 
-	public static HashMap<Integer,LectureActivity> sortLectureActivitiesWithWeightage(ArrayList<LectureActivity> activities){
+	public static HashMap<Integer,Activity> sortActivitiesWithWeightage(ArrayList<Activity> activities){
 		
-		HashMap<Integer, LectureActivity> sortedActivities = new HashMap<>();
-		activities.sort(new Comparator<LectureActivity>() {
+		HashMap<Integer, Activity> sortedActivities = new HashMap<>();
+		activities.sort(new Comparator<Activity>() {
 
 			@Override
-			public int compare(LectureActivity a1, LectureActivity a2) {
+			public int compare(Activity a1, Activity a2) {
 				if(a1.getWeightage() < a2.getWeightage())
 					return 1;
 				else if(a1.getWeightage() > a2.getWeightage())
@@ -42,27 +42,6 @@ public class SortActivities {
 	}
 	
 	
-	public static HashMap<Integer,LabActivity> sortLabActivitiesWithWeightage(ArrayList<LabActivity> activities){
-		HashMap<Integer, LabActivity> sortedActivities = new HashMap<>();
-		
-		activities.sort(new Comparator<LabActivity>() {
-
-			@Override
-			public int compare(LabActivity a1, LabActivity a2) {
-				if(a1.getWeightage() < a2.getWeightage())
-					return 1;
-				else if(a1.getWeightage() > a2.getWeightage())
-					return -1;
-				return 0;
-			}
-			
-		});
-		
-		activities.forEach(k->{
-			sortedActivities.put(activityKey++, k);
-		});
-		
-		return sortedActivities;
-	}
+	
 	
 }

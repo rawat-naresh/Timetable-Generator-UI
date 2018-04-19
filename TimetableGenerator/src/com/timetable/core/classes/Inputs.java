@@ -366,7 +366,7 @@ public class Inputs {
         return new Teacher(teacherId,teacherName,totalHours);
     }
     
-    public Room createRoom(int id, String name){
+    public Room createRoom(String id, String name){
     	
         return new Room(id,name);
     }

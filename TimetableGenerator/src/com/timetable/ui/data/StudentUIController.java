@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import com.timetable.core.classes.Branch;
 import com.timetable.core.classes.Course;
+import com.timetable.core.classes.Section;
 import com.timetable.core.classes.Year;
 import com.timetable.core.main.Data;
 
@@ -13,39 +14,45 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class StudentListUIController implements Initializable {
+public class StudentUIController implements Initializable {
 	@FXML
-	private ListView<String> coursesList;
+	private ListView<Course> coursesList;
 	@FXML
 	private TextField courseName;
 	@FXML
 	private Button addCourseBtn;
 	@FXML
-	private ListView<String> yearList;
+	private ListView<Year> yearList;
 	@FXML
 	private TextField yearName;
 	@FXML
 	private Button addYearBtn;
 	@FXML
-	private ListView<String> branchList;
+	private ListView<Branch> branchList;
 	@FXML
 	private TextField branchName;
 	@FXML
 	private Button branchAddBtn;
 	@FXML
-	private ListView<String> sectionList;
+	private ListView<Section> sectionList;
 	@FXML
 	private TextField sectionName;
 	@FXML
 	private Button addSectionBtn;
 	
+	@FXML
+    private Button generateButton;
+	
+	@FXML
+    private CheckBox subGroupCheckBox;
+	
 	private int selectedCourse = -1;
-	//private int selectedYear = -1;
-	//private int selectedBranch = -1;
+	
 	
 	private Data data = Data.getInstance();
 	
@@ -61,10 +68,10 @@ public class StudentListUIController implements Initializable {
 		coursesList.getItems().clear();
 		
 		//re-populating items
-		for(Course course:data.getCourses()) {
+		//for(Course course:data.getCourses()) {
 			
-			coursesList.getItems().addAll(course.getCourseName());
-		}
+			coursesList.getItems().addAll(data.getCourses());
+		//}
 		
 		
 	}
@@ -78,10 +85,8 @@ public class StudentListUIController implements Initializable {
 		if(selectedCourse < 0)
 			return;
 		//re-populating items
-		for(Year year : data.getCourse(selectedCourse).getYears()) {
 			
-			yearList.getItems().addAll(year.getYearName());
-		}
+			yearList.getItems().addAll(data.getCourse(selectedCourse).getYears());
 		
 		yearList.getSelectionModel().select(0);
 		
@@ -94,10 +99,8 @@ public class StudentListUIController implements Initializable {
 		if(selectedYear < 0)
 			return;
 		//re-populating items
-		for(Branch branch : data.getCourse(selectedCourse).getYear(selectedYear).getBranches()) {
 			
-			branchList.getItems().addAll(branch.getBranchName());
-		}
+			branchList.getItems().addAll(data.getCourse(selectedCourse).getYear(selectedYear).getBranches());
 		
 		branchList.getSelectionModel().select(0);
 		
@@ -114,10 +117,8 @@ public class StudentListUIController implements Initializable {
 		if(selectedBranch < 0)
 			return;
 		//re-populating items
-		for(String section : data.getCourse(selectedCourse).getYear(selectedYear).getBranch(selectedBranch).getSections()) {
 			
-			sectionList.getItems().addAll(section);
-		}
+			sectionList.getItems().addAll(data.getCourse(selectedCourse).getYear(selectedYear).getBranch(selectedBranch).getSections());
 		
 		sectionList.getSelectionModel().select(0);
 		
@@ -198,7 +199,7 @@ public class StudentListUIController implements Initializable {
 		if(branchName.getText().isEmpty())
 			showAlert("Empty Branch Name");
 		else {
-			b.addSection(sectionName.getText());
+			b.addSection(new Section(sectionName.getText()));
 			loadSections();
 		}
 		
@@ -224,6 +225,35 @@ public class StudentListUIController implements Initializable {
     void yearListMouseEvent(MouseEvent event) {
     	loadBranches();
     	loadSections();
+    }
+    
+    @FXML
+    void generateStudent(ActionEvent event) {
+    	int res = data.generateStudents();
+    	showAlert(res+" Classes Generated");
+    	
+    }
+    
+    @FXML
+    void subGroupCheckEvent(ActionEvent event) {
+    	int selectedYear = yearList.getSelectionModel().getSelectedIndex();
+		int selectedBranch = branchList.getSelectionModel().getSelectedIndex();
+    	int selectedSection = sectionList.getSelectionModel().getSelectedIndex();
+    	if(selectedSection < 0) {
+    		showAlert("Please select a section to divide it into sub groups!!");
+    		subGroupCheckBox.setSelected(false);
+			return;
+    	}
+    	
+    	Section s = data.getCourse(selectedCourse).getYear(selectedYear).getBranch(selectedBranch).getSection(selectedSection);
+    	if(subGroupCheckBox.isSelected()) {
+    		s.setHasSubGroup(true);
+    	}
+    	else {
+    		s.setHasSubGroup(false);
+    	}
+		
+		
     }
 	
 	

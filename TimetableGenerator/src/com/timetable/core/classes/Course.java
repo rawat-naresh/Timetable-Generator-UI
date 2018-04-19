@@ -7,6 +7,7 @@ public class Course {
 	ArrayList<Year> years;
 	String courseName;
 	int courseId;
+	boolean hasSubGroup = false;
 	
 	public Course(String courseName, int courseId){
 		years = new ArrayList<>();
@@ -31,6 +32,18 @@ public class Course {
 
 	public int getCourseId() {
 		return courseId;
+	}
+	
+	public boolean isHasSubGroup() {
+		return hasSubGroup;
+	}
+	public void setHasSubGroup(boolean b) {
+		this.hasSubGroup = b;
+	}
+
+	@Override
+	public String toString() {
+		return courseName;
 	}
 	
 	

@@ -51,6 +51,12 @@ public class Subject implements Serializable {
 	public int getSubjectId() {
 		return subjectId;
 	}
+
+
+	@Override
+	public String toString() {
+		return name;
+	}
     
     
     

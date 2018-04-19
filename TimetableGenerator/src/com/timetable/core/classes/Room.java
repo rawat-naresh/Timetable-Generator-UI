@@ -11,20 +11,22 @@ package com.timetable.core.classes;
  *
  */
 public class Room {
-    private String name;
-    private int id;
+    private String roomName;
     
-    public Room(int id,String name){
-        this.id = id;
-        this.name = name;
+
+	private String roomNumber;
+    
+    public Room(String roomNumber,String roomName){
+        this.roomNumber = roomNumber;
+        this.roomName = roomName;
     }
 
-	public String getName() {
-		return name;
+    public String getRoomName() {
+		return roomName;
 	}
 
-	public int getId() {
-		return id;
+	public String getRoomNumber() {
+		return roomNumber;
 	}
     
 }
