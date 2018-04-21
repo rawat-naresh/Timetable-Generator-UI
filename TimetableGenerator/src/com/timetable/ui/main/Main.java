@@ -19,7 +19,7 @@ public class Main extends Application {
 		stage = primaryStage;
 		
 		try {
-			BorderPane root = ResourceInitializer.mainUI;
+			BorderPane root = ResourceInitializer.topNavUI;
 			root.setLeft(ResourceInitializer.mainFileUI);
 			root.setCenter(ResourceInitializer.introUI);
 			primaryStage.setMaximized(true);

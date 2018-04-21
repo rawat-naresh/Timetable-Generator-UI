@@ -5,6 +5,7 @@
  */
 package com.timetable.core.classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -12,8 +13,13 @@ import java.util.ArrayList;
  * @author Naresh
  *
  */
-public class Student {
-    private String groupName;//btech_first_cse_cse1
+public class Student implements Serializable {
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5L;
+	private String groupName;//btech_first_cse_cse1
     private int groupId;//unique id for comparision
     private Year year;
     private Branch branch;

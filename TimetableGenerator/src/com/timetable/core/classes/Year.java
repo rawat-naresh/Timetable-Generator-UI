@@ -1,9 +1,14 @@
 package com.timetable.core.classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Year {
+public class Year implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9L;
 	ArrayList<Branch> branches;
 	String yearName;
 	int yearId;

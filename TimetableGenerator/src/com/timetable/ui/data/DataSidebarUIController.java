@@ -87,8 +87,8 @@ public class DataSidebarUIController {
 			if(rightLoc != null)
 				rightUI = FXMLLoader.load(getClass().getResource(rightLoc));
 			
-			ResourceInitializer.mainUI.setCenter(centerUI);
-	    	ResourceInitializer.mainUI.setRight(rightUI);
+			ResourceInitializer.topNavUI.setCenter(centerUI);
+	    	ResourceInitializer.topNavUI.setRight(rightUI);
 	    	
 	    	
 		} catch (IOException e) {

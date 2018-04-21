@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import com.timetable.core.constraint.Constraint;
+import com.timetable.core.main.Data;
 
 public class Model {
 
@@ -16,6 +17,7 @@ public class Model {
 			FileOutputStream fos = new FileOutputStream(file);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(Constraint.getInstance());
+			oos.writeObject(Data.getInstance());
 			oos.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -30,8 +32,9 @@ public class Model {
 			
 			FileInputStream fis = new FileInputStream(file);
 			ObjectInputStream ois = new ObjectInputStream(fis);
-			
-			instantiateConstraint((Constraint)ois.readObject());
+			Constraint.setInstance((Constraint)ois.readObject());
+			Data.setInstance((Data)ois.readObject());
+			//instantiateConstraint((Constraint)ois.readObject());
 			
 			ois.close();
 		} catch (IOException e) {
@@ -45,7 +48,7 @@ public class Model {
 		
 	}
 	
-	private void instantiateConstraint(Constraint constraint) {
+	/*private void instantiateConstraint(Constraint constraint) {
 		Constraint.setInstance(constraint);
-	}
+	}*/
 }

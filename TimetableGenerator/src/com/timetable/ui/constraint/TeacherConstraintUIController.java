@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class AddTeacherConstraintUIController {
+public class TeacherConstraintUIController {
 
 	@FXML
     private VBox addConstraintRoot;

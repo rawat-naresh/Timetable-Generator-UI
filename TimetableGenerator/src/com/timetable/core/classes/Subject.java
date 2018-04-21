@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 public class Subject implements Serializable {
     
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 3L;
 	private String name;
     private int subjectId;
     private boolean hasConstraint = false;

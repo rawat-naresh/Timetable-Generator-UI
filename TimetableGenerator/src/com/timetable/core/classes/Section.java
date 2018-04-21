@@ -1,6 +1,12 @@
 package com.timetable.core.classes;
 
-public class Section {
+import java.io.Serializable;
+
+public class Section implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 11L;
 	String sectionName;
 	boolean hasSubGroup = false;
 	public Section(String sectionName) {

@@ -5,14 +5,19 @@
  */
 package com.timetable.core.classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * @author Naresh
  *
  */
-public class Activity {
+public class Activity implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7L;
 	private int duration;//duration of this activity i.e normal class have duration of 1hrs.
     private int totalDuration;//no of lectures in the entire week.
     private int activityId;

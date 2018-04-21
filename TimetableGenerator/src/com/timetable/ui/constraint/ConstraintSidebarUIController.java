@@ -1,9 +1,13 @@
 package com.timetable.ui.constraint;
 
+import java.io.IOException;
+
 import com.jfoenix.controls.JFXButton;
 import com.timetable.ui.main.ResourceInitializer;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
@@ -27,22 +31,44 @@ public class ConstraintSidebarUIController {
 
     @FXML
     void showRoomConstraintUI(MouseEvent event) {
-    	ResourceInitializer.mainUI.setCenter(ResourceInitializer.listRoomConstraintUI);
-    	ResourceInitializer.mainUI.setRight(ResourceInitializer.addRoomConstraintUI);
+    	loadUI(ResourceInitializer.roomConstraintUI,null);
+    	//ResourceInitializer.mainUI.setCenter(ResourceInitializer.listRoomConstraintUI);
+    	//ResourceInitializer.mainUI.setRight(ResourceInitializer.addRoomConstraintUI);
     }
 
     @FXML
     void showStudentConstraintUI(MouseEvent event) {
-    	
-    	ResourceInitializer.mainUI.setCenter(ResourceInitializer.listStudentConstraintUI);
-    	ResourceInitializer.mainUI.setRight(ResourceInitializer.addStudentConstraintUI);
+    	loadUI(ResourceInitializer.studentConstraintUI,null);
+    	//ResourceInitializer.mainUI.setCenter(ResourceInitializer.listStudentConstraintUI);
+    	//ResourceInitializer.mainUI.setRight(ResourceInitializer.addStudentConstraintUI);
     	
     }
 
     @FXML
     void showTeacherConstraintUI(MouseEvent event) {
-    	ResourceInitializer.mainUI.setCenter(ResourceInitializer.listTeacherConstraintUI);
-    	ResourceInitializer.mainUI.setRight(ResourceInitializer.addTeacherConstraintUI);
+    	loadUI(ResourceInitializer.teacherConstraintUI,null);
+    	//ResourceInitializer.mainUI.setRight(ResourceInitializer.addTeacherConstraintUI);
+    }
+    
+    
+    public void loadUI(String centerLoc,String rightLoc) {
+    	try {
+			Parent centerUI = null;
+			Parent rightUI = null;
+			
+			if(centerLoc != null)
+				centerUI = FXMLLoader.load(getClass().getResource(centerLoc));
+			
+			if(rightLoc != null)
+				rightUI = FXMLLoader.load(getClass().getResource(rightLoc));
+			
+			ResourceInitializer.topNavUI.setCenter(centerUI);
+	    	ResourceInitializer.topNavUI.setRight(rightUI);
+	    	
+	    	
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
 }

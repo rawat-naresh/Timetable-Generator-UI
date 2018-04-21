@@ -111,6 +111,7 @@ public class StudentUIController implements Initializable {
 		
 		//clearing previously populated items
 		sectionList.getItems().clear();
+		
 		int selectedYear = yearList.getSelectionModel().getSelectedIndex();
 		int selectedBranch = branchList.getSelectionModel().getSelectedIndex();
 		
@@ -196,8 +197,8 @@ public class StudentUIController implements Initializable {
 		
 		Branch b = data.getCourse(selectedCourse).getYear(selectedYear).getBranch(selectedBranch);
 		
-		if(branchName.getText().isEmpty())
-			showAlert("Empty Branch Name");
+		if(sectionName.getText().isEmpty())
+			showAlert("Empty Section Name");
 		else {
 			b.addSection(new Section(sectionName.getText()));
 			loadSections();
@@ -230,7 +231,7 @@ public class StudentUIController implements Initializable {
     @FXML
     void generateStudent(ActionEvent event) {
     	int res = data.generateStudents();
-    	showAlert(res+" Classes Generated");
+    	showAlert(res+" New Classes Generated");
     	
     }
     

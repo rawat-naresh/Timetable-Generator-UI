@@ -245,7 +245,6 @@ public class Algorithm {
 		
 		ArrayList<String> notAvailableTimes = timeConstraint.getNotAvailableTimeSlots(id);
 		notAvailableTimes.forEach(times->{
-			//System.out.println(times);
 			
 			int row = Character.getNumericValue(times.charAt(0));
 			int cell = Character.getNumericValue(times.charAt(1));

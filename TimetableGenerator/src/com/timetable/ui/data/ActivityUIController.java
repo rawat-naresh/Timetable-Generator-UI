@@ -2,6 +2,7 @@ package com.timetable.ui.data;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.timetable.core.classes.Activity;
@@ -19,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -118,14 +120,25 @@ public class ActivityUIController implements Initializable {
 			
 			//check whether the similar activity already exists or not?
 			//if already exists show user confirmation alert saying if they want to add this activity or not?
-			checkDuplicacy();
 			
+			if(checkDuplicacy(teachers,subjects,selectedStudent)) { 
+				boolean confirm = showConfirmation("Activity already exists! Are you sure you want to add this activity?");
+				if(!confirm) {
+					clearFields();
+					return;
+				}
+					
+			}
+				
 			//adding Activity to Data
-			data.addActivity(new Activity(teachers,selectedStudent,subjects,
-					dur,totDur,aKey,tagChoice.getSelectionModel().getSelectedItem()));
+			for(int i=1;i<=dur;i++) {
+				data.addActivity(new Activity(teachers,selectedStudent,subjects,
+						dur,totDur,aKey,tagChoice.getSelectionModel().getSelectedItem()));
+			}
 			
 			data.setActivityKey(++aKey);
 			clearFields();
+			clearActivityList();
 			loadActivities();
 		}
 		catch(NumberFormatException | NullPointerException e) {
@@ -135,18 +148,29 @@ public class ActivityUIController implements Initializable {
 		
 	}
 	
-	private boolean checkDuplicacy() {
-		
+	private boolean checkDuplicacy(ArrayList<Teacher> teachers, ArrayList<Subject> subjects, Student selectedStudent) {
+		for(Activity activity:data.getActivities()) {
+			if(activity.getTeachers().containsAll(teachers) 
+					&& activity.getSubjects().containsAll(subjects) 
+					&& activity.getStudent().equals(selectedStudent)
+					) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
 	private void clearFields() {
 		teacherChoice.getSelectionModel().clearSelection();
-		teacherChoice.setValue(null);
+		//teacherChoice.setValue(null);
 		subjectChoice.getSelectionModel().clearSelection();
-		subjectChoice.setValue(null);
+		//subjectChoice.setValue(null);
 		selectedTeacherList.getItems().clear();
 		selectedSubjectList.getItems().clear();
+		
+	}
+	
+	private void clearActivityList() {
 		activityList.getItems().clear();
 	}
 	
@@ -157,6 +181,18 @@ public class ActivityUIController implements Initializable {
     	alert.setContentText(message);
     	alert.showAndWait();
     }
+	
+	private boolean showConfirmation(String message) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Duplicate entry");
+		alert.setHeaderText(null);
+		alert.setContentText(message);
+		Optional<ButtonType> answer = alert.showAndWait();
+		if(answer.get() == ButtonType.OK)
+			return true;
+		else
+			return false;
+	}
 	
 	
 

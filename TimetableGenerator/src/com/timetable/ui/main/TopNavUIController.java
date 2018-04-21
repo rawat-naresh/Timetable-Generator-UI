@@ -1,8 +1,12 @@
 package com.timetable.ui.main;
+import java.io.IOException;
+
 import com.jfoenix.controls.JFXButton;
 import com.timetable.ui.data.DataSidebarUIController;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
@@ -30,13 +34,14 @@ public class TopNavUIController {
     @FXML
     void displayConstraintUI(MouseEvent event) {
     	rootBorderPane.setLeft(ResourceInitializer.mainConstraintUI);
-    	ResourceInitializer.mainUI.setCenter(ResourceInitializer.listTeacherConstraintUI);
-    	ResourceInitializer.mainUI.setRight(ResourceInitializer.addTeacherConstraintUI);
+    	loadUI(ResourceInitializer.teacherConstraintUI);
+    	
     }
 
     @FXML
     void displayDataUI(MouseEvent event) {
     	rootBorderPane.setLeft(ResourceInitializer.mainDataUI);
+    	loadUI(ResourceInitializer.basicInfoUI);
     	new DataSidebarUIController().loadUI(ResourceInitializer.basicInfoUI, null);
     }
 
@@ -44,7 +49,6 @@ public class TopNavUIController {
     void displayFileUI(MouseEvent event) {
     	rootBorderPane.setLeft(ResourceInitializer.mainFileUI);
     	rootBorderPane.setCenter(ResourceInitializer.introUI);
-    	rootBorderPane.setRight(null);
     }
 
     @FXML
@@ -52,6 +56,15 @@ public class TopNavUIController {
     	rootBorderPane.setLeft(ResourceInitializer.mainGenerateUI);
     }
     
-
+    public void loadUI(String centerLoc) {
+    	try {
+			Parent centerUI = FXMLLoader.load(getClass().getResource(centerLoc));;
+			rootBorderPane.setCenter(centerUI);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
 
 }

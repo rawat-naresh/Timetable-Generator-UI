@@ -5,6 +5,7 @@
  */
 package com.timetable.core.classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -12,8 +13,12 @@ import java.util.ArrayList;
  * @author Naresh
  *
  */
-public class Teacher {
-    private String name;
+public class Teacher implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4L;
+	private String name;
     private int id;
     private int targetNoHours;
     private boolean hasConstraint;

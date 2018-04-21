@@ -1,14 +1,15 @@
 
 package com.timetable.core.main;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import com.timetable.core.classes.Activity;
 import com.timetable.core.classes.Branch;
 import com.timetable.core.classes.Course;
 import com.timetable.core.classes.Room;
-import com.timetable.core.classes.SortActivities;
 import com.timetable.core.classes.Student;
 import com.timetable.core.classes.Subject;
 import com.timetable.core.classes.Teacher;
@@ -19,7 +20,11 @@ import com.timetable.core.classes.Year;
  * @author Naresh
  *
  */
-public class Data {
+public class Data implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2L;
 	private int subjectKey = 0;
 	private int teacherKey = 0;
 	private int roomKey = 0;
@@ -28,6 +33,7 @@ public class Data {
 	private int yearKey = 500;
 	private int studentKey = 5000;
 	private int activityKey = 10000;
+	private int activityHashKey = 99999;
 	
 	private static  Data instance = null;
     private ArrayList<Teacher> teachers;
@@ -35,9 +41,7 @@ public class Data {
     private ArrayList<Subject> subjects;
     private HashMap<Integer,Room> rooms;
     private ArrayList<Activity> activities;
-    //private ArrayList<LabActivity> labActivities;
     private HashMap<Integer,Activity> sortedActivities;
-    //private HashMap<Integer,LabActivity> sortedLabActivities;
     private ArrayList<Course> courses;
 
         
@@ -51,7 +55,6 @@ public class Data {
         students = new ArrayList<>();
         subjects = new ArrayList<>();
         activities = new ArrayList<>();
-        //labActivities = new ArrayList<>();
         courses = new ArrayList<>();
         rooms = new HashMap<>();
         
@@ -64,7 +67,10 @@ public class Data {
     	return instance;
     }
     
-    
+    public static void setInstance(Data instance) {
+
+		Data.instance = instance;
+	}
     
     public int getCoursekey() {
 		return coursekey;
@@ -187,7 +193,24 @@ public class Data {
 	
 	public  void sortActivities() {
 		
-		sortedActivities = SortActivities.sortActivitiesWithWeightage(getActivities());
+		sortedActivities = new HashMap<>();
+		activities.sort(new Comparator<Activity>() {
+
+			@Override
+			public int compare(Activity a1, Activity a2) {
+				if(a1.getWeightage() < a2.getWeightage())
+					return 1;
+				else if(a1.getWeightage() > a2.getWeightage())
+					return -1;
+				return 0;
+			}
+			
+		});
+		
+		activities.forEach(k->{
+			sortedActivities.put(activityHashKey++, k);
+		});
+		
 		
 	}
 	
@@ -217,10 +240,13 @@ public class Data {
 							String bn = b.getBranchName();
 							
 							for(int l = 0; l< b.getSections().size();l++) {
-								
-								addStudent(new Student(cn+"_"+yn+"_"+bn+"_"+b.getSection(l),y,b,studentKey++));
-								totalStudents++;
-								
+								String grpName = cn+"_"+yn+"_"+bn+"_"+b.getSection(l);
+								for(Student s: getStudents()) {
+									if(s.getGroupName() != grpName) {
+										addStudent(new Student(grpName,y,b,studentKey++));
+										totalStudents++;
+									}
+								}
 							}
 						}
 						
@@ -246,7 +272,6 @@ public class Data {
 	public void setActivityKey(int activityKey) {
 		this.activityKey = activityKey;
 	}
-    
-    
+
     
 }

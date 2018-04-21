@@ -5,13 +5,21 @@
  */
 package com.timetable.core.classes;
 
+import java.io.Serializable;
 
 /**
  * @author Naresh
  *
  */
-public class Room {
-    private String roomName;
+public class Room implements Serializable {
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6L;
+
+
+	private String roomName;
     
 
 	private String roomNumber;
