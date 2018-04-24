@@ -51,6 +51,7 @@ public class TopNavUIController {
     @FXML
     void displayGenerateUI(MouseEvent event) {
     	rootBorderPane.setLeft(ResourceInitializer.mainGenerateUI);
+    	loadUI("/com/timetable/ui/generate/generateUI.fxml");
     }
     
     public void loadUI(String centerLoc) {
