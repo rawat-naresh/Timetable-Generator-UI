@@ -1,7 +1,7 @@
 package com.timetable.ui.data;
 
 import com.timetable.core.constraint.Constraint;
-import com.timetable.ui.main.ResourceInitializer;
+import com.timetable.ui.main.Main;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,10 +28,8 @@ public class ModifyUIController {
     	//closing window
     	((Stage)nameTextField.getScene().getWindow()).close();
     	
-    	//reloading UI
-    	
-    	new DataSidebarUIController().loadUI(ResourceInitializer.basicInfoUI, null);
-    	
+    	//reloading data
+    	Main.basicInfoUIController.loadCollegeName();
     }
 
 }

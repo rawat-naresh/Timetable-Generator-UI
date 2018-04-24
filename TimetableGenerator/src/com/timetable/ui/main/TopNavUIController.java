@@ -2,8 +2,6 @@ package com.timetable.ui.main;
 import java.io.IOException;
 
 import com.jfoenix.controls.JFXButton;
-import com.timetable.ui.data.DataSidebarUIController;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -41,8 +39,7 @@ public class TopNavUIController {
     @FXML
     void displayDataUI(MouseEvent event) {
     	rootBorderPane.setLeft(ResourceInitializer.mainDataUI);
-    	loadUI(ResourceInitializer.basicInfoUI);
-    	new DataSidebarUIController().loadUI(ResourceInitializer.basicInfoUI, null);
+    	loadBasicUI(ResourceInitializer.basicInfoUI);
     }
 
     @FXML
@@ -65,6 +62,23 @@ public class TopNavUIController {
 			e.printStackTrace();
 		}
     }
+    
+    public void loadBasicUI(String centerLoc) {
+    	
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource(centerLoc));
+    	try {
+    		
+    		Parent centerUI =loader.load();
+			ResourceInitializer.topNavUI.setCenter(centerUI);
+			Main.basicInfoUIController = loader.getController();
+	    	
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    }
+    	
+    
     
 
 }

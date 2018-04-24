@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-import com.timetable.core.classes.Teacher;
+import com.timetable.core.classes.Student;
 import com.timetable.core.constraint.Constraint;
 import com.timetable.core.constraint.TimeConstraint;
 import com.timetable.core.main.Data;
@@ -23,93 +23,88 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class TeacherConstraintUIController implements Initializable {
-
+public class StudentConstraintUIController implements Initializable {
 	@FXML
-    private ListView<String> teacherConstraintList;
-
-    @FXML
-    private ChoiceBox<Teacher> teacherChoiceBox;
-
-    @FXML
-    private ListView<Teacher> teacherList;
-
-    @FXML
-    private Button selectDayTime;
-
-    @FXML
-    private Button addButton;
-    
-    private Data data = Data.getInstance();
-    private Constraint constraint = Constraint.getInstance();
-    private TimeConstraint timeConstraint = TimeConstraint.getInstance();
-    
-    @Override
+	private ListView<String> studentConstraintList;
+	@FXML
+	private VBox addConstraintRoot;
+	@FXML
+	private ChoiceBox<Student> studentChoiceBox;
+	@FXML
+	private ListView<Student> studentList;
+	@FXML
+	private Button selectDayTime;
+	@FXML
+	private Button addButton;
+	private TimeConstraint timeConstraint = TimeConstraint.getInstance();
+	private Constraint constraint = Constraint.getInstance();
+	
+	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		loadTeachersConstraint();
+
+		loadStudentsConstraints();
     	loadChoiceBox();
     	
-    	teacherChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Teacher>() {
+    	studentChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
 
 			@Override
-			public void changed(ObservableValue<? extends Teacher> observable, Teacher oldValue, Teacher newValue) {
+			public void changed(ObservableValue<? extends Student> observable, Student oldValue, Student newValue) {
 				
-				if(!teacherList.getItems().contains(newValue) && newValue!=null)
-					teacherList.getItems().add(newValue);
+				if(!studentList.getItems().contains(newValue) && newValue!=null)
+					studentList.getItems().add(newValue);
 			}
 		});
-		
-		
+    	
 	}
 
-    @FXML
-    void addConstraint(ActionEvent event) {
-    	if(teacherList.getItems().isEmpty() || Main.slotsPickerUIController.selectedTimings == null ) {
+	
+
+	@FXML
+	public void addConstraint(ActionEvent event) {
+		if(studentList.getItems().isEmpty() || Main.slotsPickerUIController.selectedTimings == null ) {
     		showAlert("Fields cannot be empty");
     		return;
     	}
-    		
-    	
-    	for(Teacher t : teacherList.getItems()) {
-    		timeConstraint.addTeacherNotAvailableTimeSlots(t, Main.slotsPickerUIController.selectedTimings);
+		for(Student s : studentList.getItems()) {
+    		timeConstraint.addStudentNotAvailableTimeSlots(s, Main.slotsPickerUIController.selectedTimings);
     	}
     	
-    	loadTeachersConstraint();
-    	teacherList.getItems().clear();
-    	teacherChoiceBox.getSelectionModel().clearSelection();
+    	loadStudentsConstraints();
+    	studentList.getItems().clear();
+    	studentChoiceBox.getSelectionModel().clearSelection();
     	Main.slotsPickerUIController.selectedTimings = null;
-    	
-    	
-    }
-    
-    private void loadTeachersConstraint() {
-    	teacherConstraintList.getItems().clear();
-    	HashMap<Teacher, ArrayList<String>> teachersNotAvailableTimeSlots = timeConstraint.getTeachersNotAvailableTimeSlots();
-    	for(Teacher teacher: teachersNotAvailableTimeSlots.keySet() ) {
-    		String output = teacher.getName()+"[";
-    		for(String s: teachersNotAvailableTimeSlots.get(teacher)) {
+		
+	}
+	
+	
+	private void loadStudentsConstraints() {
+    	studentConstraintList.getItems().clear();
+    	HashMap<Student, ArrayList<String>> studentsNotAvailableTimeSlots = timeConstraint.getStudentsNotAvailableTimeSlots();
+    	for(Student student: studentsNotAvailableTimeSlots.keySet() ) {
+    		String output = student.getGroupName()+"[";
+    		
+    		for(String s: studentsNotAvailableTimeSlots.get(student)) {
     			int t = Character.getNumericValue(s.charAt(0));
     			int d = Character.getNumericValue(s.charAt(1));
     			output += constraint.getDay(d)+":";
     			output += constraint.getLectureTime(t)+",";
     			
-    			
-    			
     		}
     		
     		output += "]";
-    		teacherConstraintList.getItems().add(output);
+    		studentConstraintList.getItems().add(output);
     		
     	}
     	
     }
     
     private void loadChoiceBox() {
-    	ArrayList<Teacher> teachers = data.getTeachers();
-    	teacherChoiceBox.getItems().addAll(teachers);
+    	ArrayList<Student> students = Data.getInstance().getStudents();
+    	studentChoiceBox.getItems().addAll(students);
     	
     }
 
@@ -148,5 +143,6 @@ public class TeacherConstraintUIController implements Initializable {
     	alert.setContentText(message);
     	alert.showAndWait();
     }
+
 	
 }

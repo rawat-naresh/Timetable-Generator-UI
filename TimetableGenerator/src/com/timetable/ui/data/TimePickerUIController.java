@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.timetable.core.constraint.Constraint;
-import com.timetable.ui.main.ResourceInitializer;
+import com.timetable.ui.main.Main;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -133,9 +133,7 @@ public class TimePickerUIController implements Initializable {
 			}
 			else {
 				saveButton.setDisable(true);
-				/*for(int i = 0;i<15;i++) {
-					fields.get(i).setDisable(true);
-				}*/
+				
 			}
 			
 			
@@ -172,8 +170,9 @@ public class TimePickerUIController implements Initializable {
     		constraint.setLectureTimes(timings);
     		((Stage)saveButton.getScene().getWindow()).close();
     		
-    		//reload the UI
-        	new DataSidebarUIController().loadUI(ResourceInitializer.basicInfoUI, null);
+    		//reload data
+    		Main.basicInfoUIController.hoursList.getItems().clear();
+        	Main.basicInfoUIController.loadHours();
     		
     	}
     	

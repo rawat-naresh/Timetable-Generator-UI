@@ -9,6 +9,8 @@ import com.timetable.core.classes.Section;
 import com.timetable.core.classes.Year;
 import com.timetable.core.main.Data;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -60,6 +62,16 @@ public class StudentUIController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		loadCourses();
+		
+		sectionList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Section>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Section> observable, Section oldValue, Section newValue) {
+				if(newValue != null)
+					subGroupCheckBox.setSelected(newValue.isHasSubGroup());
+				
+			}
+		});;
 		
 	}
 	

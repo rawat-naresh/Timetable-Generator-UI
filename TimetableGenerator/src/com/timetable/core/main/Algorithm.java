@@ -32,7 +32,7 @@ public class Algorithm {
 	public void populateTimetable() {
 		
 		data.getStudents().forEach(student->{
-			setBreak(student.getGroupId());
+			setBreak(student);
 		});
 		
 		
@@ -241,15 +241,15 @@ public class Algorithm {
 
 	
 
-	private void setBreak(int id) {
+	private void setBreak(Student student) {
 		
-		ArrayList<String> notAvailableTimes = timeConstraint.getNotAvailableTimeSlots(id);
+		ArrayList<String> notAvailableTimes = timeConstraint.getStudentNotAvailableTimeSlots(student);
 		notAvailableTimes.forEach(times->{
 			
 			int row = Character.getNumericValue(times.charAt(0));
 			int cell = Character.getNumericValue(times.charAt(1));
 			//System.out.println(row+" "+cell);
-			TimetableCell c = distribution.getTimetableSheet(id).getRow(row).getCell(cell);
+			TimetableCell c = distribution.getTimetableSheet(student.getGroupId()).getRow(row).getCell(cell);
 			c.setEmpty(false);
 			c.setActive(false);
 			//c.setValue(Constraint.BREAK_TYPE);

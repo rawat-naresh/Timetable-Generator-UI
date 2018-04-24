@@ -1,6 +1,5 @@
 package com.timetable.core.main;
 
-import com.timetable.core.classes.Inputs;
 import com.timetable.core.constraint.Constraint;
 import com.timetable.core.export.Export;
 import com.timetable.core.timetable.TimetableCell;
@@ -15,7 +14,7 @@ public class Generate {
 
 	public static void main(String[] args) {
 		
-		new Inputs().fetchFromFile();
+		//new Inputs().fetchFromFile();
 		Data data = Data.getInstance();
 		
 		Constraint constraint = Constraint.getInstance();

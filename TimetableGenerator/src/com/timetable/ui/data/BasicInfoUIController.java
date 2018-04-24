@@ -28,14 +28,14 @@ public class BasicInfoUIController implements Initializable {
     private Button collegeNameModifyButton;
 
     @FXML
-    private ListView<String> daysList;
+    ListView<String> daysList;
 
 
     @FXML
     private Button addDaysButton;
 
     @FXML
-    private ListView<String> hoursList;
+    ListView<String> hoursList;
 
 
     @FXML
@@ -45,9 +45,9 @@ public class BasicInfoUIController implements Initializable {
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
     	
-		collegeName.setText(constraint.getCollegeName());
-		daysList.getItems().addAll(constraint.getDays());
-		hoursList.getItems().addAll(constraint.getLectureTimes());	
+    	loadCollegeName();
+    	loadDays();
+    	loadHours();
 	}
 
     @FXML
@@ -67,10 +67,24 @@ public class BasicInfoUIController implements Initializable {
     	displayNewWindow("/com/timetable/ui/data/modifyUI.fxml", "Modify Name");
   
     }
+    public void loadCollegeName() {
+    	collegeName.setText(constraint.getCollegeName());
+    }
+    
+    public void loadHours() {
+    	hoursList.getItems().addAll(constraint.getLectureTimes());
+    }
+    
+    public void loadDays() {
+    	daysList.getItems().addAll(constraint.getDays());
+    }
+    
+    
     
     private void displayNewWindow(String loc,String title) {
     	try {
 			Parent window = FXMLLoader.load(getClass().getResource(loc));
+			
 			Stage newStage = new Stage(StageStyle.DECORATED);
 			newStage.setTitle(title);
 			newStage.setScene(new Scene(window));
@@ -80,7 +94,7 @@ public class BasicInfoUIController implements Initializable {
 			e.printStackTrace();
 		}
     }
+    
 
-	
 
 }

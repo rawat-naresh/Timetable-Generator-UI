@@ -191,6 +191,8 @@ public class Data implements Serializable {
 		return courses.get(i);
 	}
 	
+	
+	
 	public  void sortActivities() {
 		
 		sortedActivities = new HashMap<>();
@@ -216,13 +218,8 @@ public class Data implements Serializable {
 	
 	
 	public int generateStudents() {
-		students.clear();
+		ArrayList<Student> tmpStudents = new ArrayList<Student>();
 		
-		/*new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-*/
 				int totalStudents=0;
 				for(int i=0; i< getCourses().size(); i++) {
 					
@@ -234,19 +231,14 @@ public class Data implements Serializable {
 						Year y = c.getYear(j);
 						String yn = y.getYearName();
 						
-						for(int k = 0;k< y.getBranches().size(); k++) {
+						for(int k = 0; k< y.getBranches().size(); k++) {
 							
 							Branch b = y.getBranch(k);
 							String bn = b.getBranchName();
 							
 							for(int l = 0; l< b.getSections().size();l++) {
 								String grpName = cn+"_"+yn+"_"+bn+"_"+b.getSection(l);
-								for(Student s: getStudents()) {
-									if(s.getGroupName() != grpName) {
-										addStudent(new Student(grpName,y,b,studentKey++));
-										totalStudents++;
-									}
-								}
+								tmpStudents.add(new Student(grpName,y,b,studentKey++));
 							}
 						}
 						
@@ -254,13 +246,25 @@ public class Data implements Serializable {
 					
 					
 				}
-		/*		
+				
+		ArrayList<Student> stud = getStudents();
+			
+		for(Student tmp:tmpStudents) {
+			boolean occur = false;
+			for(Student student: stud) {
+				if(tmp.getGroupName().equals(student.getGroupName())) {
+					occur = true;
+					break;
+				}
+			
 			}
-			
-			
-		}).start();*/
 		
+			if(!occur) {
+				addStudent(tmp);
+				totalStudents++;
+			}
 		
+		}
 		
 		return totalStudents;
 	}

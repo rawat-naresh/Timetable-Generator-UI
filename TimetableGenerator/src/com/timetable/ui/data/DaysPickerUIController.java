@@ -3,9 +3,8 @@ package com.timetable.ui.data;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import com.timetable.core.constraint.Constraint;
-import com.timetable.ui.main.ResourceInitializer;
+import com.timetable.ui.main.Main;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -84,12 +83,14 @@ public class DaysPickerUIController implements Initializable {
     	if(sat.isSelected())
     		days.add("Saturday");
     	
+    	Constraint.getInstance().setNoOfDaysPerWeek(days.size());
     	Constraint.getInstance().setDays(days);
     	
     	((Stage)rootContainer.getScene().getWindow()).close();
     	
     	//reload the UI
-    	new DataSidebarUIController().loadUI(ResourceInitializer.basicInfoUI, null);
+    	Main.basicInfoUIController.daysList.getItems().clear();
+    	Main.basicInfoUIController.loadDays();
     	
     }
 

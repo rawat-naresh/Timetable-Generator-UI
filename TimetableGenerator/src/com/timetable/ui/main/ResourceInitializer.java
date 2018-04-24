@@ -23,7 +23,6 @@ public class ResourceInitializer {
 	public static final String studentUI = "/com/timetable/ui/data/studentUI.fxml";
 	public static final String basicInfoUI = "/com/timetable/ui/data/basicInfoUI.fxml";
 	public static final String teacherConstraintUI = "/com/timetable/ui/constraint/teacherConstraintUI.fxml";
-	//public static VBox addTeacherConstraintUI;
 	public static final String studentConstraintUI = "/com/timetable/ui/constraint/studentConstraintUI.fxml";
 	public static VBox addStudentConstraintUI;
 	public static VBox listRoomConstraintUI;

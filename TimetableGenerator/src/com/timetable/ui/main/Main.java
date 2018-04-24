@@ -1,5 +1,8 @@
 package com.timetable.ui.main;
 	
+
+import com.timetable.ui.constraint.SlotsPickerUIController;
+import com.timetable.ui.data.BasicInfoUIController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -11,6 +14,8 @@ import javafx.stage.Stage;
  *
  */
 public class Main extends Application {
+	public static BasicInfoUIController basicInfoUIController;
+	public static SlotsPickerUIController slotsPickerUIController = null;
 	
 	Stage stage;
 	@Override
@@ -42,6 +47,10 @@ public class Main extends Application {
 	
 	public Stage getMainStage() {
 		return stage;
+	}
+	
+	public static BasicInfoUIController getBasicInfoUIController() {
+		return basicInfoUIController;
 	}
 	
 	
