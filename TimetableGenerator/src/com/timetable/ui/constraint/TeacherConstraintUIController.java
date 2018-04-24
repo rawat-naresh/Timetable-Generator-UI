@@ -119,7 +119,6 @@ public class TeacherConstraintUIController implements Initializable {
 		Parent daytimePicker = null;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/timetable/ui/constraint/slotsPickerUI.fxml"));
 		try {
-			//daytimePicker = (VBox)FXMLLoader.load(getClass().getResource("/com/timetable/ui/constraint/daysPickerUI.fxml"));
 			daytimePicker =  loader.load();
 			Main.slotsPickerUIController = loader.getController();
 			

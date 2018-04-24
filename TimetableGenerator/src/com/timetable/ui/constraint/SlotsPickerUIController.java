@@ -19,6 +19,7 @@ import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 
 public class SlotsPickerUIController implements Initializable {
 	@FXML
@@ -43,33 +44,18 @@ public class SlotsPickerUIController implements Initializable {
 		int rowCount = gridPane.getRowCount();
 		int colCount = gridPane.getColumnCount();
 		
-		for(int val= 0;val<nodes.size();val++) {
-			
-			//int val = row*rowCount+col;
-			if(nodes.get(val) instanceof CheckBox)
-				System.out.println("CheckBox"+" "+ val);
-			else if(nodes.get(val) instanceof Label)
-				System.out.println("Label"+" "+ val);
-			else
-				System.out.println("Else"+" "+ val);
-			
-			
-			
-		}
-		//System.out.println(nodes);
-		//Label l = (Label)nodes.get(0);
-		//System.out.println(l.getText());
-		/*for(int row = 1; row < rowCount; row++) {
+
+		for(int row = 1; row < rowCount; row++) {
 			for(int col = 1; col < colCount; col++) {
 				
-				/*CheckBox cb = (CheckBox)nodes.get(row*rowCount+1+col);
+				CheckBox cb = (CheckBox)nodes.get(row*colCount+col+1);
 				if(cb.isSelected())
 					selectedTimings.add((row-1)+""+(col-1));
 				
 			}
-		}*/
-		/*
-		((Stage)gridPane.getScene().getWindow()).close();*/
+		}
+		
+		((Stage)gridPane.getScene().getWindow()).close();
 	}
 	
 	
