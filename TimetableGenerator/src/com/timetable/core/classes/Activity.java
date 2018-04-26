@@ -81,7 +81,7 @@ public class Activity implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Activity [activityId=" + activityId+", Weightage"+weightage
+		return "Activity [activityId=" + activityId+", Weightage=" + weightage+"Tot.D=" + totalDuration
 				+ ", activityTag=" + activityTag + ", teachers=" + teachers + ", student=" + student + ", subjects="
 				+ subjects + "]";
 	}

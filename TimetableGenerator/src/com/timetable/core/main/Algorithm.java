@@ -2,6 +2,7 @@ package com.timetable.core.main;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
 import com.timetable.core.classes.Activity;
 import com.timetable.core.classes.Student;
 import com.timetable.core.classes.Teacher;
@@ -131,6 +132,73 @@ public class Algorithm {
 		//outside row
 		
 		
+		if(finalRowColOfCells.isEmpty()) {
+			//in-sheet conflict
+			//this conflict is normally caused by the the lab placement.
+			
+			ArrayList<TimetableRow> labRows = findRowsWithLab(sheet);
+			ArrayList<TimetableRow>emptyCellRows = findEmptyCells(sheet);
+			
+			int occurrence = 0;
+			TimetableRow noOccurrenceRow;
+			int removedActivityKey = 0 ; 
+			//finding an activity in "labrows" with which we can swap this activity without raising any in-sheet conflicts
+			for(TimetableRow labRow :labRows) {
+				for(Integer labCellIndex : labRow.getCells().keySet()) {
+					TimetableCell cellFromLabRow = labRow.getCell(labCellIndex);
+					if(cellFromLabRow.getType().equals(Constraint.LECTURE_TYPE)) {
+						int activityId = data.getSortedActivity(cellFromLabRow.getValue()).getActivityId();
+						
+						for(TimetableRow emptyCellRow : emptyCellRows) {
+							occurrence = 0;//reinitializing occurrence when moving to the next row.
+							for(Integer cellIndex : emptyCellRow.getCells().keySet()) {
+								TimetableCell cell = emptyCellRow.getCell(cellIndex);
+									if(cell.getType().equals(Constraint.LECTURE_TYPE)) {
+										if(activityId == data.getSortedActivity(cell.getValue()).getActivityId()) {
+											occurrence++;
+										}
+									}
+							}
+							
+							if(occurrence == 0) {
+								noOccurrenceRow = emptyCellRow;
+								break;
+							}
+						}
+						
+						
+						if(occurrence == 0) {
+							removedActivityKey = cellFromLabRow.getValue();
+							cellFromLabRow.setValue(-1);
+							cellFromLabRow.setEmpty(true);
+							cellFromLabRow.setType(Constraint.UNOCCUPIED_TYPE);
+							break;
+						}
+						
+					}
+					
+					
+						
+				}
+				
+				if(occurrence == 0)
+					break;
+					
+				
+			}
+			
+			
+			
+			//System.out.println(rows+" "+cells);
+			System.out.println("Internal Conflict!!! Couldn't place :" +activity);
+			System.out.println(removedActivityKey);
+			
+			
+			//recursive call with unplaced activity first
+			//after that making another recursive call with removed activity
+			findTimeSlot(activityKey, activity, sheet);
+			findTimeSlot(removedActivityKey, data.getSortedActivity(removedActivityKey), sheet);
+		}
 		
 		Collections.shuffle(finalRowColOfCells);
 		for(Integer[] rowColArray : finalRowColOfCells) {
@@ -138,8 +206,11 @@ public class Algorithm {
 			int c = rowColArray[1];
 			int[] conflict = calculateConflict(r, c, activity);
 			
-			if(conflict[1] == 0) {
+			if(conflict[1] == 0 ) {
 				TimetableRow row = sheet.getRow(r);
+				
+				//placement of activity into cell
+				
 				for(int i = c;i <= c+duration-1; i++) {
 					TimetableCell cell = row.getCell(i);
 					cell.setValue(activityKey);
@@ -160,7 +231,7 @@ public class Algorithm {
 			}
 			else {
 				//insert it into a conflictlist
-				
+				System.out.println("External Conflict");
 				//found conflict
 				//add this cell to the cellConflict list with conflict value
 				//cellConflicts.put(conflict[1],conflict[0]);
@@ -173,7 +244,47 @@ public class Algorithm {
 	
 	
 	
+	private ArrayList<TimetableRow> findRowsWithLab(TimetableSheet sheet) {
+		
+		ArrayList<TimetableRow> rows = new ArrayList<>();
+		
+		for (Integer r : sheet.getRows().keySet()) {
+			TimetableRow row =  sheet.getRows().get(r);
+			
+			for(Integer c :row.getCells().keySet() ) {
+				if(row.getCell(c).getType().equals(Constraint.LAB_TYPE)) { 
+					rows.add(row);
+					break;
+				}
+				
+			}
+			
+		}
+		
+		return rows;
+		
+	}
 	
+	private ArrayList<TimetableRow> findEmptyCells(TimetableSheet sheet){
+		ArrayList<TimetableRow> rows = new ArrayList<>();
+		
+		for (Integer r : sheet.getRows().keySet()) {
+			TimetableRow row =  sheet.getRows().get(r);
+			
+			for(Integer c :row.getCells().keySet() ) {
+				
+				if(row.getCell(c).getType().equals(Constraint.UNOCCUPIED_TYPE)) {
+					rows.add(row);
+				}
+					
+			}
+			
+		}
+		
+		
+		return rows;
+		
+	}
 	
 	private int[] calculateConflict(int row,int cell,Activity activity) {
 
