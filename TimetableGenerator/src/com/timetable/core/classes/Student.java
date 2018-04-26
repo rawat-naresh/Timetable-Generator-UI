@@ -6,7 +6,7 @@
 package com.timetable.core.classes;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+
 
 
 /**
@@ -24,7 +24,7 @@ public class Student implements Serializable {
     private Year year;
     private Branch branch;
     private boolean hasConstraint = false;
-    private ArrayList<String> subGroups = new ArrayList<>(2); 
+    private String[] subGroups;
 
     
     public Student(String groupName, Year year, Branch branch, int groupId) {
@@ -60,10 +60,10 @@ public class Student implements Serializable {
     }
     
     
-    public void addSubGropus(String subGroupName ) {
-    	subGroups.add(subGroupName);
+    public void setSubGroups(String[] subGroups ) {
+    	this.subGroups = subGroups;
     }
-    public ArrayList<String> getSubGroups(){
+    public String[] getSubGroups(){
     	return subGroups;
     }
     

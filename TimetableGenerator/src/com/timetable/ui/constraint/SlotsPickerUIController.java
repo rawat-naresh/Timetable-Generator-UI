@@ -50,7 +50,7 @@ public class SlotsPickerUIController implements Initializable {
 				
 				CheckBox cb = (CheckBox)nodes.get(row*colCount+col+1);
 				if(cb.isSelected())
-					selectedTimings.add((row-1)+""+(col-1));
+					selectedTimings.add(col+""+row);
 				
 			}
 		}

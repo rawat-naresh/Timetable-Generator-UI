@@ -12,40 +12,39 @@ import com.timetable.core.timetable.TimetableSheet;
  */
 public class Generate {
 
-	public static void main(String[] args) {
+	Distribution distribution ;
+	Data data;
+	Constraint constraint;
+	
+	public Generate() {
+		distribution = Distribution.getInstance();
+		data = Data.getInstance();
+		constraint = Constraint.getInstance();
+	}
+	
+	public void generate() {
 		
-		//new Inputs().fetchFromFile();
-		Data data = Data.getInstance();
-		
-		Constraint constraint = Constraint.getInstance();
+		//compute weightage
 		constraint.computeActivityWeightage(data.getActivities());
 		
-	/*
-		
-		System.out.println("--------------------STUDENT");
-		data.getStudents().forEach(k->{
-			System.out.println(k.getGroupName());
-		});
-		System.out.println("--------------------TEACHERS");
-		data.getTeachers().forEach(k->{
-			System.out.println(k.getName());
-		});
-		
-		System.out.println("--------------------SUBJECTS");
-		data.getSubjects().forEach(k->{
-			System.out.println(k.getName());
-		});
-		
-*/
-		
 		//sort activities accordidng to weightage
-		
 		data.sortActivities();
 		
+		//create vitrual timetable
+		createVirtualTimetable();
 		
-		Distribution distribution = Distribution.getInstance();
+		//start algo
+		startAlgo();
+		
+		
+		printVirtualTbl();
+		
+		
+	}
 	
-		
+	
+	
+	private void createVirtualTimetable() {
 		
 		//creating virtualTimetable slots
 		
@@ -74,66 +73,89 @@ public class Generate {
 			distribution.addTimetableSheet(data.getStudents().get(s).getGroupId(), sheet);
 		}
 		
-		
-		
-		
-		/*data.getSortedLectureActivities().forEach((key,value)->{
-			System.out.println(value.getStudent().getGroupName()+": :"+value.getSubject().getName());
-		});*/
-		
-		
-		//Algorithm
-		
-		
+	}
+	
+	private void startAlgo() {
 		Algorithm a = new Algorithm();
 		a.populateTimetable();
-		
-		
-		
-		
-		/*for(int s=0;s<data.getStudents().size();s++) {
-			//creating sheet equals to number of student
-			TimetableSheet sheet = distribution.getTimetableSheet(data.getStudents().get(s).getGroupId());
-			
-			for(int i=1;i<=Constraint.noOfDaysPerWeek;i++) {
-				//creating row
-				TimetableRow row= sheet.getRow(i);
-				String cellValue="";
-				for(int j=1;j<=Constraint.noOfHoursPerDay;j++) {
-					//creating cell
-					TimetableCell cell= row.getCell(j);
+	}
 	
-					cellValue = cellValue+cell.getType()+"\\("+cell.isEmpty()+"\\)"+"\t";
-				}
-				
-				System.out.println(cellValue);
-			}
-			System.out.println("------------Another sheet----");
-			
-		}*/
-		
-		/*for(int key: data.getSortedLectureActivities().keySet()) {
-			System.out.println(data.getLectureActivity(key).getSubject().getName());
-		}
-		*/
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//Exporting
-		/*
+	public void export() {
 		Export export = new Export("NewOutputDemo.xls");
 		export.createExcelSheets(distribution.getTimetableSheets());
 		
-		export.writeToExcelFile();*/
+		export.writeToExcelFile();
+	}
 	
 	
+	private void printVirtualTbl() {
+		
+		for(int s=0;s<data.getStudents().size();s++) {
+		
+		TimetableSheet sheet = distribution.getTimetableSheet(data.getStudents().get(s).getGroupId());
 
+		for(int i=1;i<=constraint.getNoOfDaysPerWeek();i++) {
+			
+			TimetableRow row= sheet.getRow(i);
+			String cellValue="";
+			for(int j=1;j<=constraint.getNoOfHoursPerDay();j++) {
+				
+				TimetableCell cell= row.getCell(j);
+
+				cellValue = cellValue+cell.getType()+"\t";
+			}
+			
+			System.out.println(cellValue);
+		}
+		System.out.println("------------Another sheet----");
+
+		}
+		
+		
 	}
 
 }
+
+
+
+
+
+
+
+/*
+
+System.out.println("--------------------STUDENT");
+data.getStudents().forEach(k->{
+	System.out.println(k.getGroupName());
+});
+System.out.println("--------------------TEACHERS");
+data.getTeachers().forEach(k->{
+	System.out.println(k.getName());
+});
+
+System.out.println("--------------------SUBJECTS");
+data.getSubjects().forEach(k->{
+	System.out.println(k.getName());
+});
+
+*/
+
+/*data.getSortedLectureActivities().forEach((key,value)->{
+System.out.println(value.getStudent().getGroupName()+": :"+value.getSubject().getName());
+});*/
+
+
+//Algorithm
+
+
+
+
+
+
+
+
+
+/*for(int key: data.getSortedLectureActivities().keySet()) {
+System.out.println(data.getLectureActivity(key).getSubject().getName());
+}
+*/

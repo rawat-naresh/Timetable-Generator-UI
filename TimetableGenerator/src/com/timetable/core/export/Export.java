@@ -112,7 +112,7 @@ public class Export {
 		sheet.autoSizeColumn(0);
 		dayCell.setCellValue(constraint.getDay(k-1));//modified here later
 		dayCell.setCellStyle(style);
-		
+		//System.out.println(cells.keySet());
 		for(int key : cells.keySet()) {
 			TimetableCell cell = cells.get(key);
 			int cellValue = cell.getValue();
@@ -122,10 +122,18 @@ public class Export {
 			c.setCellStyle(style);
 			sheet.autoSizeColumn(key);
 			
-				
-			if(cellType == Constraint.LECTURE_TYPE || cellType == Constraint.LAB_TYPE) {
+			if(cellType.equals(Constraint.LECTURE_TYPE) || cellType.equals(Constraint.LAB_TYPE)) {
 				Activity activity = data.getSortedActivities().get(cellValue);
-				sheet.addMergedRegion(new CellRangeAddress(k, k, key, key-1+activity.getDuration()));
+				int dur = activity.getDuration();
+				//if(dur > 1)
+					//sheet.addMergedRegion(new CellRangeAddress(k, k, key, key-1+activity.getDuration()));
+				try {
+					sheet.addMergedRegion(new CellRangeAddress(k, k, key, key-1+activity.getDuration()));
+				}
+				catch(Exception e) {
+					
+				}
+				//sheet.addMergedRegion(new CellRangeAddress(k, k, key, key-1+activity.getDuration()));
 				String teachers="";
 				String subjects = "";
 				String subgroup = "";
@@ -135,10 +143,11 @@ public class Export {
 				for(Subject s: activity.getSubjects())
 					subjects+= "  "+s.getName();
 				
-				for(String sub:activity.getStudent().getSubGroups())
-					subgroup+="  "+sub;
-				
-				key = key + activity.getDuration();
+				/*if(cellType.equals(Constraint.LAB_TYPE))
+					for(String sub:activity.getStudent().getSubGroups())
+						subgroup+="  "+sub;
+				*/
+				key = key + dur;
 				
 			
 				c.setCellValue(teachers+"\n"+subjects+"\n"+subgroup);
@@ -146,7 +155,7 @@ public class Export {
 				
 			
 			
-			else if(cellType == Constraint.BREAK_TYPE) 
+			else if(cellType.equals(Constraint.BREAK_TYPE) ) 
 				c.setCellValue("BREAK");
 			
 			
@@ -160,11 +169,19 @@ public class Export {
 	public void writeToExcelFile() {
 		try {
 			workbook.write(output);
-			output.close();
+			
 		}
 		catch (IOException e) {
 			
 			e.printStackTrace();
+		}
+		
+		finally{
+			try {
+				output.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}	
 

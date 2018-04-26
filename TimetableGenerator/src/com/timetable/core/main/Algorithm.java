@@ -36,24 +36,19 @@ public class Algorithm {
 		});
 		
 		
-		
-		data.getSortedActivities().forEach((k,activity)->{
+		data.getSortedActivities().forEach((key,activity)->{
 			int studentId = activity.getStudent().getGroupId();
 			TimetableSheet sheet = distribution.getTimetableSheet(studentId);
-			findTimeSlot(k, activity, sheet );
-			
-			
-			
+			findTimeSlot(key, activity, sheet );
 			
 		});
-		
-
-		
 		
 	}
 	
 	private int findTimeSlot(Integer activityKey, Activity activity, TimetableSheet sheet) {
 		int duration = activity.getDuration();
+		//System.out.println(duration);
+		
 		
 		//HashMap<Integer,int[]> cellConflicts = new HashMap<>();//for adding conflicts
 		
@@ -62,7 +57,6 @@ public class Algorithm {
 			TimetableRow row =  sheet.getRows().get(r);
 			ArrayList<Integer> startIndexOfCells = new ArrayList<>();
 			boolean rowHasLab = false;
-			//added later
 			int occurrence = 0;
 			
 			for(Integer c :row.getCells().keySet() ) {
@@ -146,7 +140,7 @@ public class Algorithm {
 			
 			if(conflict[1] == 0) {
 				TimetableRow row = sheet.getRow(r);
-				for(int i=c;i <= c+duration-1; i++) {
+				for(int i = c;i <= c+duration-1; i++) {
 					TimetableCell cell = row.getCell(i);
 					cell.setValue(activityKey);
 					cell.setEmpty(false);
@@ -182,7 +176,7 @@ public class Algorithm {
 	
 	
 	private int[] calculateConflict(int row,int cell,Activity activity) {
-		//ArrayList<Teacher> teachers = labActivity.getTeachers();
+
 		int duration = activity.getDuration();
 		int limit = cell+duration-1;
 		int conflict = 0;
@@ -242,13 +236,11 @@ public class Algorithm {
 	
 
 	private void setBreak(Student student) {
-		
 		ArrayList<String> notAvailableTimes = timeConstraint.getStudentNotAvailableTimeSlots(student);
 		notAvailableTimes.forEach(times->{
 			
 			int row = Character.getNumericValue(times.charAt(0));
 			int cell = Character.getNumericValue(times.charAt(1));
-			//System.out.println(row+" "+cell);
 			TimetableCell c = distribution.getTimetableSheet(student.getGroupId()).getRow(row).getCell(cell);
 			c.setEmpty(false);
 			c.setActive(false);

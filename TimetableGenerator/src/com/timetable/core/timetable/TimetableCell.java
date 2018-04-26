@@ -1,5 +1,6 @@
 package com.timetable.core.timetable;
 
+import com.timetable.core.constraint.Constraint;
 
 /**
  * @author Naresh
@@ -9,7 +10,7 @@ public class TimetableCell {
 	private int value=-1;
 	private boolean isActive = true;
 	private boolean isEmpty = true;
-	private String type;
+	private String type = Constraint.UNOCCUPIED_TYPE;
 	public TimetableCell() {
 		
 	}

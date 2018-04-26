@@ -88,10 +88,10 @@ public class StudentConstraintUIController implements Initializable {
     		String output = student.getGroupName()+"[";
     		
     		for(String s: studentsNotAvailableTimeSlots.get(student)) {
-    			int t = Character.getNumericValue(s.charAt(0));
-    			int d = Character.getNumericValue(s.charAt(1));
-    			output += constraint.getDay(d)+":";
-    			output += constraint.getLectureTime(t)+",";
+    			int d = Character.getNumericValue(s.charAt(0));
+    			int t = Character.getNumericValue(s.charAt(1));
+    			output += constraint.getDay(d-1)+":";
+    			output += constraint.getLectureTime(t-1)+",";
     			
     		}
     		

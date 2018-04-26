@@ -106,8 +106,8 @@ public class ActivityUIController implements Initializable {
 		
 		
 		try {
-			int dur = Integer.parseInt(split.getText());
-			int totDur = Integer.parseInt(duration.getText());
+			int dur = Integer.parseInt(duration.getText());//length of one lecture
+			int totDur = Integer.parseInt(split.getText());//number of lectures in entire week
 			int aKey = data.getActivityKey();
 			Student selectedStudent = studentChoice.getSelectionModel().getSelectedItem();
 			if(selectedTeacherList.getItems().isEmpty() ||selectedSubjectList.getItems().isEmpty() || selectedStudent == null) {
@@ -131,7 +131,7 @@ public class ActivityUIController implements Initializable {
 			}
 				
 			//adding Activity to Data
-			for(int i=1;i<=dur;i++) {
+			for(int i=1;i<=totDur;i++) {
 				data.addActivity(new Activity(teachers,selectedStudent,subjects,
 						dur,totDur,aKey,tagChoice.getSelectionModel().getSelectedItem()));
 			}

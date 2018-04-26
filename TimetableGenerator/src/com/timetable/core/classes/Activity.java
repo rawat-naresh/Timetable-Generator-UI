@@ -18,8 +18,8 @@ public class Activity implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 7L;
-	private int duration;//duration of this activity i.e normal class have duration of 1hrs.
-    private int totalDuration;//no of lectures in the entire week.
+	private int duration;//length of one lecture
+    private int totalDuration;//no of lectures in entire week.
     private int activityId;
     private String activityTag;//to identify whether the activity is lab or class.
     private int weightage = 0;
@@ -81,7 +81,7 @@ public class Activity implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Activity [duration=" + duration + ", totalDuration=" + totalDuration + ", activityId=" + activityId
+		return "Activity [activityId=" + activityId+", Weightage"+weightage
 				+ ", activityTag=" + activityTag + ", teachers=" + teachers + ", student=" + student + ", subjects="
 				+ subjects + "]";
 	}

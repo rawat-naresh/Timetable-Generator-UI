@@ -5,11 +5,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import com.timetable.core.classes.Activity;
 import com.timetable.core.classes.Branch;
 import com.timetable.core.classes.Course;
 import com.timetable.core.classes.Room;
+import com.timetable.core.classes.Section;
 import com.timetable.core.classes.Student;
 import com.timetable.core.classes.Subject;
 import com.timetable.core.classes.Teacher;
@@ -33,7 +35,7 @@ public class Data implements Serializable {
 	private int yearKey = 500;
 	private int studentKey = 5000;
 	private int activityKey = 10000;
-	private int activityHashKey = 99999;
+	private int activityHashKey = 100000;
 	
 	private static  Data instance = null;
     private ArrayList<Teacher> teachers;
@@ -57,6 +59,7 @@ public class Data implements Serializable {
         activities = new ArrayList<>();
         courses = new ArrayList<>();
         rooms = new HashMap<>();
+        
         
     }
     
@@ -195,7 +198,6 @@ public class Data implements Serializable {
 	
 	public  void sortActivities() {
 		
-		sortedActivities = new HashMap<>();
 		activities.sort(new Comparator<Activity>() {
 
 			@Override
@@ -209,10 +211,15 @@ public class Data implements Serializable {
 			
 		});
 		
-		activities.forEach(k->{
-			sortedActivities.put(activityHashKey++, k);
-		});
+		makeSortedHash();
 		
+	}
+	
+	private void makeSortedHash() {
+		sortedActivities = new LinkedHashMap<>();
+		activities.forEach(activity->{
+		sortedActivities.put(activityHashKey++, activity);
+	});
 		
 	}
 	
@@ -237,8 +244,12 @@ public class Data implements Serializable {
 							String bn = b.getBranchName();
 							
 							for(int l = 0; l< b.getSections().size();l++) {
-								String grpName = cn+"_"+yn+"_"+bn+"_"+b.getSection(l);
+								//Section s = b.getSection(l);
+								String grpName = cn+"_"+yn+"_"+bn+"_"+ b.getSection(l);
+								//Student stud = new Student(grpName,y,b,studentKey++);
 								tmpStudents.add(new Student(grpName,y,b,studentKey++));
+								/*if(s.isHasSubGroup())
+									stud.setSubGroups(Constraint.SUBGROUP_NAMES);*/
 							}
 						}
 						
@@ -262,6 +273,7 @@ public class Data implements Serializable {
 			if(!occur) {
 				addStudent(tmp);
 				totalStudents++;
+				
 			}
 		
 		}

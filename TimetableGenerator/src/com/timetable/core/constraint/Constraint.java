@@ -21,14 +21,15 @@ public class Constraint implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private static Constraint instance = null;
-	
+	public static final String[] SUBGROUP_NAMES = {"T1","T2"};
+	public static final int LAB_WEIGHTAGE = 100;
     public static final int TIME_CONSTRAINT = 50;
     public static final int SPACE_CONSTRAINT = 50;
     public static int totalWeight=0;
     public static final String LAB_TYPE = "(L)";
     public static final String LECTURE_TYPE = "(T)";
     public static final String BREAK_TYPE = "(B)";
-    public static final int UNOCCUPIED_TYPE = 1999;
+    public static final String UNOCCUPIED_TYPE = "(Empty)";
     
     private int noOfHoursPerDay;
 	private int noOfDaysPerWeek;
@@ -36,11 +37,6 @@ public class Constraint implements Serializable {
     
     public ArrayList<String> days = new ArrayList<>(7);
     public ArrayList<String> lectureTimes = new ArrayList<>(6);
-    
-    //{"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"}
-    //{"09:00-09:55","09:55-10:50","10:50-11:45","11:45-12:40","12:40-1:35",
-    //"01:35-02:30","02:30-03:25","03:25-04:20"}
-    
     
     private Constraint() {
 		
@@ -133,6 +129,10 @@ public class Constraint implements Serializable {
     			}
     			
     		});
+    		
+    		if(v.getActivityTag().equals(Constraint.LAB_TYPE)) {
+    			totalWeight+=LAB_WEIGHTAGE;
+    		}
     		
     		v.setWeightage(totalWeight);
     		totalWeight = 0;
