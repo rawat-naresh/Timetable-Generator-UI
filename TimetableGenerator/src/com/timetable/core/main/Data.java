@@ -11,7 +11,6 @@ import com.timetable.core.classes.Activity;
 import com.timetable.core.classes.Branch;
 import com.timetable.core.classes.Course;
 import com.timetable.core.classes.Room;
-import com.timetable.core.classes.Section;
 import com.timetable.core.classes.Student;
 import com.timetable.core.classes.Subject;
 import com.timetable.core.classes.Teacher;

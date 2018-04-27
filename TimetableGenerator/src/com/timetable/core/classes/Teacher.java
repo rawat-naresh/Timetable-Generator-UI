@@ -6,7 +6,7 @@
 package com.timetable.core.classes;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 
 /**
@@ -23,18 +23,19 @@ public class Teacher implements Serializable {
     private int targetNoHours;
     private boolean hasConstraint;
     // total hours in a week.
-    private ArrayList<Student> allocatedStudent;
+    private HashSet<Student> allocatedStudent;
+    
 
 
     public Teacher(int id,String name,int targetNoHours) {
-    	this.allocatedStudent = new ArrayList<>();
+    	this.allocatedStudent = new HashSet<>();
         this.id = id;
         this.name = name;
         this.targetNoHours = targetNoHours;
     }
     
 
-	public ArrayList<Student> getAllocatedStudent() {
+	public HashSet<Student> getAllocatedStudent() {
 		return allocatedStudent;
 	}
 	

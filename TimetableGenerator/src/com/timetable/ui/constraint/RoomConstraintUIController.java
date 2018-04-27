@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import com.timetable.core.classes.Room;
 import com.timetable.core.classes.Subject;
-import com.timetable.core.constraint.SpaceConstraint;
+//import com.timetable.core.constraint.SpaceConstraint;
 import com.timetable.core.main.Data;
 
 import javafx.beans.value.ChangeListener;
@@ -30,7 +30,7 @@ public class RoomConstraintUIController implements Initializable {
 	private Button addButton;
 	
 	private Data data = Data.getInstance();
-	private SpaceConstraint spaceConstraint = SpaceConstraint.getInstance();
+	//private SpaceConstraint spaceConstraint = SpaceConstraint.getInstance();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

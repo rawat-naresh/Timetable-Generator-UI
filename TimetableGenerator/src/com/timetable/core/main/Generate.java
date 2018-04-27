@@ -24,11 +24,17 @@ public class Generate {
 	
 	public void generate() {
 		
+		//allocateStudents();
+		
 		//compute weightage
 		constraint.computeActivityWeightage(data.getActivities());
 		
 		//sort activities accordidng to weightage
 		data.sortActivities();
+		
+		/*data.getTeachers().forEach(teacher->{
+			System.out.println(teacher.getAllocatedStudent());
+		});*/
 		
 		//create vitrual timetable
 		createVirtualTimetable();
@@ -41,6 +47,15 @@ public class Generate {
 		
 		
 	}
+	
+	/*private void allocateStudents() {
+		data.getActivities().forEach(activity->{
+			ArrayList<Teacher> teachers = activity.getTeachers();
+			teachers.forEach(teacher->{
+				teacher.addAllocatedStudent(activity.getStudent());
+			});
+		});
+	}*/
 	
 	
 	

@@ -136,6 +136,12 @@ public class ActivityUIController implements Initializable {
 						dur,totDur,aKey,tagChoice.getSelectionModel().getSelectedItem()));
 			}
 			
+			//allocating students to the teacher that the teacher teaches to
+			
+			teachers.forEach(teacher->{
+				teacher.addAllocatedStudent(selectedStudent);
+			});
+			
 			data.setActivityKey(++aKey);
 			clearFields();
 			clearActivityList();

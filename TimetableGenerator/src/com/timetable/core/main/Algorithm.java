@@ -140,6 +140,7 @@ public class Algorithm {
 			ArrayList<TimetableRow>emptyCellRows = findEmptyCells(sheet);
 			
 			int occurrence = 0;
+			@SuppressWarnings("unused")
 			TimetableRow noOccurrenceRow;
 			int removedActivityKey = 0 ; 
 			//finding an activity in "labrows" with which we can swap this activity without raising any in-sheet conflicts
@@ -187,11 +188,9 @@ public class Algorithm {
 				
 			}
 			
-			
-			
 			//System.out.println(rows+" "+cells);
-			System.out.println("Internal Conflict!!! Couldn't place :" +activity);
-			System.out.println(removedActivityKey);
+			//System.out.println("Internal Conflict!!! Couldn't place :" +activity);
+			//System.out.println(removedActivityKey);
 			
 			
 			//recursive call with unplaced activity first
@@ -201,6 +200,7 @@ public class Algorithm {
 		}
 		
 		Collections.shuffle(finalRowColOfCells);
+		
 		for(Integer[] rowColArray : finalRowColOfCells) {
 			int r = rowColArray[0];
 			int c = rowColArray[1];
@@ -231,7 +231,7 @@ public class Algorithm {
 			}
 			else {
 				//insert it into a conflictlist
-				System.out.println("External Conflict");
+				System.out.println("External Conflict:Couldn't place"+activity);
 				//found conflict
 				//add this cell to the cellConflict list with conflict value
 				//cellConflicts.put(conflict[1],conflict[0]);
@@ -296,13 +296,14 @@ public class Algorithm {
 		
 		for(Teacher teacher : activity.getTeachers()) {
 			int currentTeacherId = teacher.getId();
+			//there are no students allocated to the teacher so,below loop won't work for now
 			for(Student student : teacher.getAllocatedStudent()) {
 				int studentId = student.getGroupId();
 				sheetConflict[0] = studentId;
 				TimetableSheet timetableSheet = distribution.getTimetableSheet(studentId);
 				
 				for(int i = cell;i <= limit; i++) {
-					TimetableCell c = timetableSheet.getRow(row).getCell(cell);
+					TimetableCell c = timetableSheet.getRow(row).getCell(i);
 					
 					
 					if(!c.isEmpty() && c.isActive()) {
@@ -323,17 +324,17 @@ public class Algorithm {
 						
 				}
 				
-				if(conflict > 0) {
+				/*if(conflict > 0) {
 					sheetConflict[1] = conflict;
 					break;
-				}
+				}*/
 				
 				
 			}
 			
-			if(conflict > 0) {
+			/*if(conflict > 0) {
 				break;
-			}
+			}*/
 		}
 		
 		
@@ -355,53 +356,10 @@ public class Algorithm {
 			TimetableCell c = distribution.getTimetableSheet(student.getGroupId()).getRow(row).getCell(cell);
 			c.setEmpty(false);
 			c.setActive(false);
-			//c.setValue(Constraint.BREAK_TYPE);
 			c.setType(Constraint.BREAK_TYPE);
 		});
 	}
 	
 
-	
-	
-	
-	/*private boolean swapActivities(TimetableSheet sheet) {
-		System.out.println("swap");
-		//ArrayList<Integer[]> rowswithLab = new ArrayList<>();
-		//ArrayList<Integer[]> rowswithEmptySlots = new ArrayList<>();
-
-		for(int r=1; r <= constraint.getNoOfDaysPerWeek(); r++) {
-			TimetableRow row = sheet.getRow(r);
-			System.out.println("--");
-			for(int c=1; c <= constraint.getNoOfHoursPerDay(); c++) {
-				TimetableCell cell = row.getCell(c);
-				//System.out.println(c);
-				//System.out.println(cell.getType());
-				if(cell.isEmpty()) {
-					//rowswithEmptySlots.add(new Integer[] {r,c});
-					System.out.println("empty");
-				}
-				else if(cell.getType() == Constraint.LAB_TYPE) {
-					rowswithLab.add(new Integer[] {r,c});
-					break;
-				}
-				
-			}
-		}
-		
-		
-		for(Integer[] a :rowswithLab) {
-			System.out.println(a[0]+" "+a[1]);
-		}
-		
-		for(Integer[] a :rowswithEmptySlots) {
-			System.out.println(a[0]+" "+a[1]);
-		}
-		
-		
-		return false;
-	}
-
-	
-	*/
 	
 }
