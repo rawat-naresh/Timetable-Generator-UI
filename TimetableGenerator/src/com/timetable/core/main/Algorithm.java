@@ -48,7 +48,8 @@ public class Algorithm {
 	
 	private int findTimeSlot(Integer activityKey, Activity activity, TimetableSheet sheet) {
 		int duration = activity.getDuration();
-		//System.out.println(duration);
+		String activityType = activity.getActivityTag();
+		//System.out.println(activityType);
 		
 		
 		//HashMap<Integer,int[]> cellConflicts = new HashMap<>();//for adding conflicts
@@ -80,7 +81,7 @@ public class Algorithm {
 						
 						else if(currentCell.isActive()) {
 							//current cell contains either lab or lecture
-							if(currentCellType == Constraint.LAB_TYPE) {
+							if(currentCellType.equals(Constraint.LAB_TYPE)) {
 								rowHasLab = true;
 								break;
 							}
@@ -90,6 +91,7 @@ public class Algorithm {
 								occurrence++;
 								break;
 							}
+							
 						}
 						
 						else {
@@ -101,12 +103,16 @@ public class Algorithm {
 					}	
 				}
 				
+				if(activityType.equals(Constraint.LECTURE_TYPE) && occurrence > 0) {
+					break;
+				}
 				
-				/*if this row has labActivity, then skip to the next row*/
-				if(rowHasLab || occurrence > 0) {
+				else if(activityType.equals(Constraint.LAB_TYPE) && rowHasLab) {
 					
 					break;
 				}
+				
+				
 				
 				
 				//if the number of consecutive empty cells from this cell= duration,then add the index of current cell to the array
@@ -120,8 +126,15 @@ public class Algorithm {
 			}
 			
 			//outside of cell loop
+			if(activityType.equals(Constraint.LECTURE_TYPE) && occurrence == 0) {
+				
+				for(Integer c:startIndexOfCells)
+					finalRowColOfCells.add(new Integer[] {r,c});
+				
+			}
 			
-			if(!rowHasLab && occurrence == 0) {
+			
+			else if(activityType.equals(Constraint.LAB_TYPE) && !rowHasLab) {
 				for(Integer c:startIndexOfCells)
 					finalRowColOfCells.add(new Integer[] {r,c});
 				
@@ -190,7 +203,7 @@ public class Algorithm {
 			
 			//System.out.println(rows+" "+cells);
 			//System.out.println("Internal Conflict!!! Couldn't place :" +activity);
-			//System.out.println(removedActivityKey);
+			//System.out.println("Removed Activity "+data.getSortedActivity(removedActivityKey));
 			
 			
 			//recursive call with unplaced activity first
@@ -199,47 +212,61 @@ public class Algorithm {
 			findTimeSlot(removedActivityKey, data.getSortedActivity(removedActivityKey), sheet);
 		}
 		
-		Collections.shuffle(finalRowColOfCells);
 		
-		for(Integer[] rowColArray : finalRowColOfCells) {
-			int r = rowColArray[0];
-			int c = rowColArray[1];
-			int[] conflict = calculateConflict(r, c, activity);
+		
+		else {
+			//finalRowColOfCells is not empty. which means we have empty slots where we can place this activity.
+			//among these empty slots find a slot having 0 external conflicts.
+			//if such slot found,the place this activity.
 			
-			if(conflict[1] == 0 ) {
-				TimetableRow row = sheet.getRow(r);
-				
-				//placement of activity into cell
-				
-				for(int i = c;i <= c+duration-1; i++) {
-					TimetableCell cell = row.getCell(i);
-					cell.setValue(activityKey);
-					cell.setEmpty(false);
-					cell.setType(activity.getActivityTag());
+			Collections.shuffle(finalRowColOfCells);
+			
+			for(Integer[] rowColArray : finalRowColOfCells) {
+				int r = rowColArray[0];
+				int c = rowColArray[1];
+				int[] conflict = calculateConflict(r, c, activity);
+				System.out.println(conflict[0]+" "+conflict[1]);
+				if(conflict[1] == 0 ) {
+					TimetableRow row = sheet.getRow(r);
+					
+					//placement of activity into cell
+					
+					for(int i = c;i <= c+duration-1; i++) {
+						TimetableCell cell = row.getCell(i);
+						cell.setValue(activityKey);
+						cell.setEmpty(false);
+						cell.setType(activity.getActivityTag());
+					}
+					
+					//clear the cellConclicts list, because we found the conflictless cell for this activity
+					//cellConflicts.clear();
+					
+					//return successs
+					//move to the next activity in sortedList
+					
+					
+					
+					return 1;
+					
 				}
-				
-				//clear the cellConclicts list, because we found the conflictless cell for this activity
-				//cellConflicts.clear();
-				
-				//return successs
-				//move to the next activity in sortedList
-				
-				
-				
-				return 1;
-				
+				else {
+					//insert it into a conflictlist
+					
+					//found conflict
+					//add this cell to the cellConflict list with conflict value
+					//cellConflicts.put(conflict[1],conflict[0]);
+				}
 			}
-			else {
-				//insert it into a conflictlist
-				System.out.println("External Conflict:Couldn't place"+activity);
-				//found conflict
-				//add this cell to the cellConflict list with conflict value
-				//cellConflicts.put(conflict[1],conflict[0]);
-			}
+			
+			System.out.println("No place for "+activityKey+" "+activity);
+			return 0;
+			
+			
 		}
 		
+		return 1;
 		
-		return 0;
+		
 	}
 	
 	
@@ -296,7 +323,6 @@ public class Algorithm {
 		
 		for(Teacher teacher : activity.getTeachers()) {
 			int currentTeacherId = teacher.getId();
-			//there are no students allocated to the teacher so,below loop won't work for now
 			for(Student student : teacher.getAllocatedStudent()) {
 				int studentId = student.getGroupId();
 				sheetConflict[0] = studentId;
@@ -324,17 +350,17 @@ public class Algorithm {
 						
 				}
 				
-				/*if(conflict > 0) {
+				if(conflict > 0) {
 					sheetConflict[1] = conflict;
 					break;
-				}*/
+				}
 				
 				
 			}
 			
-			/*if(conflict > 0) {
+			if(conflict > 0) {
 				break;
-			}*/
+			}
 		}
 		
 		
